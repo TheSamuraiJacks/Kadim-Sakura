@@ -8,36 +8,43 @@ public class AttackController : MonoBehaviour
     public Animator animator;
     public bool onUlt = false;
 
-    [Header("Teleport")]
-    public Vector3 targetPos = Vector3.zero;
-    bool TeleportAvaible = false;
+    bool isAlive = true;
+    float health = 100;
+
+    public IAbility[] abilityList;
+
+    private void Start()
+    {
+        foreach (var ability in abilityList)
+        {
+            if (ability != null)
+            ability.Preparation(gameObject);
+        }
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
-        {
             Attack();
-        }
+        
 
         if (Input.GetMouseButtonDown(1))
-        {
             Block();
-        }
+        
 
         if (Input.GetMouseButtonUp(1))
             animator.SetBool("isBlocking", false);
 
-        
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (!TeleportAvaible)
-            {
-                SetTargetPos();
-            }
-            else
-            {
-                Teleport();
-            }
+            if (abilityList[0] != null)
+                abilityList[0].Use();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if(abilityList[1] != null)
+            abilityList[1].Use();
         }
     }
 
@@ -58,20 +65,6 @@ public class AttackController : MonoBehaviour
     {
         animator.SetTrigger("isBlocking 0");
         animator.SetBool("isBlocking", true);
-    }
-
-    void SetTargetPos()
-    {
-        targetPos = transform.position;
-        TeleportAvaible = true;
-    }
-
-    void Teleport()
-    {
-        gameObject.GetComponent<CharacterController>().enabled = false;
-        transform.position = targetPos;
-        gameObject.GetComponent<CharacterController>().enabled = true;
-        TeleportAvaible = false;
     }
 
 }
