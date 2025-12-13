@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     public float spawnInterval = 5f;     // Kaç saniyede bir çıkacağı
 
     [Header("Area Settings")]
-    public float spawnRange = 20f;       // Alan genişliği
+    public float spawnRange = 10f;       // Alan genişliği
     private Camera mainCamera;
 
     void Start()

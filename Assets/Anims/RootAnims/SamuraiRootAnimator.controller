@@ -404,7 +404,7 @@ AnimatorStateMachine:
     m_Position: {x: -590, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1067856245434803144}
-    m_Position: {x: -30, y: 90, z: 0}
+    m_Position: {x: -20, y: 90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8398180872730364436}
     m_Position: {x: -380, y: 250, z: 0}
@@ -594,7 +594,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack Blend Tree
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5474043383302200850}
