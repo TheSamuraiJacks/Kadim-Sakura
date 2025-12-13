@@ -13,24 +13,32 @@ public class AttackController : MonoBehaviour
 
     public IAbility[] abilityList;
 
+    // --- EKLEME 1: VFX'i bağlayacağımız kutuyu oluşturuyoruz ---
+    [Header("Efekt Ayarları")]
+    public ParticleSystem slashVFX;
+    // -----------------------------------------------------------
+
     private void Start()
     {
         foreach (var ability in abilityList)
         {
             if (ability != null)
-            ability.Preparation(gameObject);
+                ability.Preparation(gameObject);
         }
+
+        // Oyun başladığında efekt yanlışlıkla çalışmasın diye durduruyoruz
+        if (slashVFX != null) slashVFX.Stop();
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
             Attack();
-        
+
 
         if (Input.GetMouseButtonDown(1))
             Block();
-        
+
 
         if (Input.GetMouseButtonUp(1))
             animator.SetBool("isBlocking", false);
@@ -43,8 +51,8 @@ public class AttackController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if(abilityList[1] != null)
-            abilityList[1].Use();
+            if (abilityList[1] != null)
+                abilityList[1].Use();
         }
     }
 
@@ -59,6 +67,13 @@ public class AttackController : MonoBehaviour
             attackForce = 3;
 
         animator.SetTrigger("isAttacked");
+
+        // --- EKLEME 2: Saldırı anında efekti çalıştırıyoruz ---
+        if (slashVFX != null)
+        {
+            slashVFX.Play(); // Efekti oynat
+        }
+        // -----------------------------------------------------
     }
 
     void Block()
@@ -66,16 +81,15 @@ public class AttackController : MonoBehaviour
         animator.SetTrigger("isBlocking 0");
         animator.SetBool("isBlocking", true);
     }
-    
+
     public void TakeDamage(float dmg)
     {
         health -= dmg;
-        if(health <= 0) isAlive = false;
+        if (health <= 0) isAlive = false;
 
         if (isAlive)
         {
             animator.SetTrigger("isDead");
         }
     }
-
 }
