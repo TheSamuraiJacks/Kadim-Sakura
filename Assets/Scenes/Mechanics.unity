@@ -172,6 +172,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 79460be10bb4de34388b006978e6af58,
         type: 2}
+    - target: {fileID: 4621291043171980420, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7c017088fafa14144a6960fbebabaae9, type: 3}
     - target: {fileID: 5114843885449201687, guid: e0880782cb3a80247afa756d29b41be1,
         type: 3}
       propertyPath: m_LocalPosition.x
