@@ -138,13 +138,30 @@ PrefabInstance:
     - target: {fileID: 466598479815772203, guid: e0880782cb3a80247afa756d29b41be1,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3092598075651934492, guid: e0880782cb3a80247afa756d29b41be1,
         type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3974771826169394068, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: abilityList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974771826169394068, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: abilityList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ffbf1e2da85e76458a37690b0333128,
+        type: 2}
+    - target: {fileID: 3974771826169394068, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: abilityList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ffbf1e2da85e76458a37690b0333128,
+        type: 2}
     - target: {fileID: 5114843885449201687, guid: e0880782cb3a80247afa756d29b41be1,
         type: 3}
       propertyPath: m_LocalPosition.x

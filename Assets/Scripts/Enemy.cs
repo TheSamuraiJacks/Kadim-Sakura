@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     private float lastAttackTime;
     private bool isDead = false;
 
+    public GameObject orbPrefab;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -85,13 +87,6 @@ public class Enemy : MonoBehaviour
     void AttackPlayer()
     {
         anim.SetTrigger("Attack");
-
-        // Burada oyuncunun HealthManager'ına ulaşıp can azaltacağız
-        // Örnek:
-        // HealthManager playerHealth = player.GetComponent<HealthManager>();
-        // if(playerHealth != null) playerHealth.TakeDamage(damage);
-
-        Debug.Log(gameObject.name + " oyuncuya vurdu! Hasar: " + damage);
     }
 
     // Mermi veya kılıç buna değince çağıracak
@@ -102,7 +97,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= amount;
 
         // İstersen buraya "Hit" animasyonu (Impact) ekleyebilirsin
-        // anim.SetTrigger("Hit"); 
+         anim.SetTrigger("Hit"); 
 
         if (currentHealth <= 0)
         {
@@ -122,7 +117,8 @@ public class Enemy : MonoBehaviour
         myCollider.enabled = false;
 
         anim.SetTrigger("Die");
-
+        Instantiate(orbPrefab).transform.position = transform.position + Vector3.up * 0.5f;
         Destroy(gameObject, 4f);
+
     }
 }

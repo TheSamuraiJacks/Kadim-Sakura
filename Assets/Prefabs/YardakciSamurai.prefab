@@ -221,3 +221,5 @@ MonoBehaviour:
   attackSpeed: 1.5
   attackRange: 2
   scoreValue: 10
+  orbPrefab: {fileID: 2865216790203391490, guid: ecbace3e9ae7bbd40ba450a288dfed8b,
+    type: 3}

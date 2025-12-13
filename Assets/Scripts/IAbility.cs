@@ -14,7 +14,7 @@ public class Teleport : IAbility
     Vector3 targetPos;
 
     bool TeleportAvaible = false;
-    public float teleportSpeed = 30;
+    public float teleportSpeed = 10;
 
     public override void Use()
     {
@@ -26,7 +26,7 @@ public class Teleport : IAbility
         else
         {
             go.GetComponent<CharacterController>().enabled = false;
-            go.transform.position = Vector3.Lerp(go.transform.position, targetPos, Time.deltaTime * teleportSpeed);
+            go.transform.position = targetPos;
             go.GetComponent<CharacterController>().enabled = true;
             TeleportAvaible = false;
         }

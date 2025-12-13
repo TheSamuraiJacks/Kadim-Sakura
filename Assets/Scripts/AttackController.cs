@@ -9,7 +9,7 @@ public class AttackController : MonoBehaviour
     public bool onUlt = false;
 
     bool isAlive = true;
-    float health = 100;
+    public float health = 100;
 
     public IAbility[] abilityList;
 

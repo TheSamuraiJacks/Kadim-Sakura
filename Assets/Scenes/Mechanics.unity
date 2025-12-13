@@ -135,6 +135,43 @@ PrefabInstance:
       propertyPath: m_Name
       value: RootPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 2426659214300153573, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: runSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8690be39dd6a740b2a54dd0dae8e3306, type: 3}
+    - target: {fileID: 2426659214300153573, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: walkSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 010bb4ec1dd2c4252adc30201a3ed50e, type: 3}
+    - target: {fileID: 2426659214300153573, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: e84573fc8373e440caa0a00ab17cdd8a, type: 3}
+    - target: {fileID: 3974771826169394068, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: OwnedTeleport
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974771826169394068, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: abilityList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974771826169394068, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: abilityList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 79460be10bb4de34388b006978e6af58,
+        type: 2}
+    - target: {fileID: 3974771826169394068, guid: e0880782cb3a80247afa756d29b41be1,
+        type: 3}
+      propertyPath: abilityList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 79460be10bb4de34388b006978e6af58,
+        type: 2}
     - target: {fileID: 5114843885449201687, guid: e0880782cb3a80247afa756d29b41be1,
         type: 3}
       propertyPath: m_LocalPosition.x
