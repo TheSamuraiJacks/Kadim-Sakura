@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
     [Header("Area Settings")]
     public float spawnRange = 10f;
     private Camera mainCamera;
-
+    public Transform playerTransform;
     // Singleton mantığına gerek yok ama düşmanların spawner'a ulaşması için referans lazım
     // Bu yüzden static bir instance tutabiliriz VEYA düşman doğarken ona spawner'ı verebiliriz.
     // Şimdilik en temizi: Düşman doğarken ona "Ben senin sahibinim" demek.
@@ -60,8 +60,10 @@ public class Spawner : MonoBehaviour
         {
             float randomX = Random.Range(-spawnRange, spawnRange);
             float randomZ = Random.Range(-spawnRange, spawnRange);
-            spawnPosition = new Vector3(randomX, 0, randomZ);
-
+            if(playerTransform != null)
+                spawnPosition = new Vector3(playerTransform.position.x + randomX, 0, playerTransform.position.z + randomZ);
+            
+            Debug.Log(spawnPosition);
             if (!IsVisibleToCamera(spawnPosition))
             {
                 isValidPosition = true;

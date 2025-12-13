@@ -35,7 +35,8 @@ public class CamFollowTarget : MonoBehaviour
         transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRot, Time.deltaTime * rotPower);
 
         //Hareket
-        if (transform.position != target.transform.position)
-            transform.position = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
+        if(target != null)
+            if (transform.position != target.transform.position)
+                transform.position = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
     }
 }
