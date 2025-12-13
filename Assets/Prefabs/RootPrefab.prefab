@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5114843885449201687}
   m_Layer: 0
   m_Name: RootPrefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 8593116478180936156}
   onUlt: 0
-  targetPos: {x: 0, y: 0, z: 0}
+  abilityList: []
 --- !u!136 &7348807071037702423
 CapsuleCollider:
   m_ObjectHideFlags: 0
