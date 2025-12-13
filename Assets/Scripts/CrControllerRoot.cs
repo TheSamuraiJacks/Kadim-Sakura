@@ -39,7 +39,7 @@ public class CrControllerRoot : MonoBehaviour
     public float rotPower = 10f;
     public bool isMoving;
 
-    // Ses için AudioSource
+    // Ses iï¿½in AudioSource
     private AudioSource footstepAudioSource;
     private AudioSource musicAudioSource;
     private bool wasMoving = false;
@@ -47,20 +47,20 @@ public class CrControllerRoot : MonoBehaviour
 
     private void Start()
     {
-        // Yürüme sesleri için AudioSource oluþtur
+        // Yï¿½rï¿½me sesleri iï¿½in AudioSource oluï¿½tur
         footstepAudioSource = gameObject.AddComponent<AudioSource>();
         footstepAudioSource.loop = true;
         footstepAudioSource.volume = footstepVolume;
-        footstepAudioSource.spatialBlend = 0f; // 2D ses (oyuncu için)
+        footstepAudioSource.spatialBlend = 0f; // 2D ses (oyuncu iï¿½in)
 
-        // Arka plan müziði için AudioSource oluþtur
+        // Arka plan mï¿½ziï¿½i iï¿½in AudioSource oluï¿½tur
         musicAudioSource = gameObject.AddComponent<AudioSource>();
         musicAudioSource.loop = true;
         musicAudioSource.volume = musicVolume;
         musicAudioSource.spatialBlend = 0f; // 2D ses
         musicAudioSource.playOnAwake = false;
 
-        // Müziði baþlat
+        // Mï¿½ziï¿½i baï¿½lat
         if (playMusicOnStart && backgroundMusic != null)
         {
             PlayBackgroundMusic();
@@ -72,7 +72,7 @@ public class CrControllerRoot : MonoBehaviour
         GroundCheck();
         MovePlayer();
 
-        // Zýplama
+        // Zï¿½plama
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump();
@@ -81,7 +81,7 @@ public class CrControllerRoot : MonoBehaviour
 
     void GroundCheck()
     {
-        // Eðer yer ile temas varsa aþaðý doðru hýz sýfýrlanýr
+        // Eï¿½er yer ile temas varsa aï¿½aï¿½ï¿½ doï¿½ru hï¿½z sï¿½fï¿½rlanï¿½r
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
@@ -103,7 +103,7 @@ public class CrControllerRoot : MonoBehaviour
             isMoving = false;
         }
 
-        // Koþma kontrolü
+        // Koï¿½ma kontrolï¿½
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
 
         animator.SetBool("isRunning", isRunning);
@@ -116,60 +116,43 @@ public class CrControllerRoot : MonoBehaviour
             animator.SetFloat("GroundDistance", distance);
         }
 
-        // *** YÜRÜYüÞ VE KOÞU SESLERÝNÝ KONTROL ET ***
+        // *** Yï¿½Rï¿½Yï¿½ï¿½ VE KOï¿½U SESLERï¿½Nï¿½ KONTROL ET ***
         HandleFootstepSounds(isMoving, isRunning);
 
-        // Yerçekimi
+        // Yerï¿½ekimi
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
 
-    // Yürüyüþ ve koþu seslerini yönetir
+    // Yï¿½rï¿½yï¿½ï¿½ ve koï¿½u seslerini yï¿½netir
+        // YÃ¼rÃ¼yÃ¼ÅŸ ve koÅŸu seslerini yÃ¶netir
     void HandleFootstepSounds(bool moving, bool running)
     {
-        // Sadece yerdeyken ses çal
-        if (!isGrounded)
+        // EÄŸer yerdeysek ve hareket ediyorsak ses Ã§almalÄ±yÄ±z
+        if (isGrounded && moving)
         {
-            StopFootstepSound();
-            return;
-        }
-
-        // Hareket durumu deðiþtiyse
-        if (moving && !wasMoving)
-        {
-            // Hareket baþladý - ses baþlat
             if (running)
             {
-                PlayFootstepSound(runSound, 1.2f); // Koþma biraz daha hýzlý
+                PlayFootstepSound(runSound, 1.2f); // KoÅŸma
             }
             else
             {
-                PlayFootstepSound(walkSound, 1f);
+                PlayFootstepSound(walkSound, 1f); // YÃ¼rÃ¼me
             }
         }
-        else if (!moving && wasMoving)
+        // Hareket etmiyor veya havadaysak sesi durdur
+        else
         {
-            // Hareket durdu - sesi durdur
             StopFootstepSound();
         }
-        else if (moving && (running != wasRunning))
-        {
-            // Yürümeden koþmaya veya tersi geçiþ
-            if (running)
-            {
-                PlayFootstepSound(runSound, 1.2f);
-            }
-            else
-            {
-                PlayFootstepSound(walkSound, 1f);
-            }
-        }
-
+        
+        // wasMoving ve wasRunning deÄŸiÅŸkenlerine artÄ±k ihtiyacÄ±mÄ±z kalmadÄ± ama
+        // kodun geri kalanÄ±nda hata vermemesi iÃ§in gÃ¼ncelleyebiliriz veya silebiliriz.
         wasMoving = moving;
         wasRunning = running;
     }
 
-    // Yürüyüþ sesini baþlatýr
+    // Yï¿½rï¿½yï¿½ï¿½ sesini baï¿½latï¿½r
     void PlayFootstepSound(AudioClip clip, float pitch)
     {
         if (clip == null) return;
@@ -187,7 +170,7 @@ public class CrControllerRoot : MonoBehaviour
         }
     }
 
-    // Yürüyüþ sesini durdurur
+    // Yï¿½rï¿½yï¿½ï¿½ sesini durdurur
     void StopFootstepSound()
     {
         if (footstepAudioSource.isPlaying)
@@ -203,7 +186,7 @@ public class CrControllerRoot : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             animator.SetTrigger("isJumped");
 
-            // Zýplarken yürüme sesini durdur
+            // Zï¿½plarken yï¿½rï¿½me sesini durdur
             StopFootstepSound();
 
             if (AudioManager.instance != null)
@@ -224,15 +207,15 @@ public class CrControllerRoot : MonoBehaviour
 
         transform.Rotate(Vector3.up * mouseX);
 
-        // followTarget ayarý
+        // followTarget ayarï¿½
         Vector3 temp = transform.eulerAngles;
         transform.rotation = Quaternion.Lerp(transform.rotation, followTarget.transform.rotation,  Time.deltaTime * rotPower);
         transform.eulerAngles = new Vector3(temp.x, transform.eulerAngles.y, temp.z);
     }
 
-    // *** ARKA PLAN MÜZÝÐÝ FONKSÝYONLARI ***
+    // *** ARKA PLAN Mï¿½Zï¿½ï¿½ï¿½ FONKSï¿½YONLARI ***
 
-    // Arka plan müziðini baþlat
+    // Arka plan mï¿½ziï¿½ini baï¿½lat
     void PlayBackgroundMusic()
     {
         if (backgroundMusic != null && !musicAudioSource.isPlaying)
@@ -242,7 +225,7 @@ public class CrControllerRoot : MonoBehaviour
         }
     }
 
-    // Müziði durdur
+    // Mï¿½ziï¿½i durdur
     public void StopBackgroundMusic()
     {
         if (musicAudioSource.isPlaying)
@@ -251,7 +234,7 @@ public class CrControllerRoot : MonoBehaviour
         }
     }
 
-    // Müziði duraklat
+    // Mï¿½ziï¿½i duraklat
     public void PauseBackgroundMusic()
     {
         if (musicAudioSource.isPlaying)
@@ -260,7 +243,7 @@ public class CrControllerRoot : MonoBehaviour
         }
     }
 
-    // Müziði devam ettir
+    // Mï¿½ziï¿½i devam ettir
     public void ResumeBackgroundMusic()
     {
         if (!musicAudioSource.isPlaying && musicAudioSource.time > 0)
@@ -269,7 +252,7 @@ public class CrControllerRoot : MonoBehaviour
         }
     }
 
-    // Müzik sesini deðiþtir
+    // Mï¿½zik sesini deï¿½iï¿½tir
     public void SetMusicVolume(float volume)
     {
         musicVolume = Mathf.Clamp01(volume);
