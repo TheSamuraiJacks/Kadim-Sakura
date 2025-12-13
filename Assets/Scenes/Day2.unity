@@ -408,6 +408,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4437869410619231435, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7e84e18f849da44da9ea04701d0026fd, type: 3}
     - target: {fileID: 4964008579148189822, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
       propertyPath: field of view
@@ -471,15 +476,40 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 588419705642253745, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 977219694782244947, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3296252916050112482, guid: 25af79b4c68965748b8e0630376933bf,
         type: 3}
       propertyPath: m_Name
       value: PointC
       objectReference: {fileID: 0}
+    - target: {fileID: 3311925801284352000, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3321695830330172348, guid: 25af79b4c68965748b8e0630376933bf,
         type: 3}
       propertyPath: m_Name
       value: PointB
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886908695842850407, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939630161638181668, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4009409692630354710, guid: 25af79b4c68965748b8e0630376933bf,
         type: 3}
@@ -490,6 +520,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: map
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841614380911576712, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6055197926160584881, guid: 25af79b4c68965748b8e0630376933bf,
         type: 3}
@@ -541,10 +576,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6071834267498125212, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740033362587770435, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7035414148420243133, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7658103260794094063, guid: 25af79b4c68965748b8e0630376933bf,
         type: 3}
       propertyPath: m_Name
       value: PointD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035082467587076871, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
