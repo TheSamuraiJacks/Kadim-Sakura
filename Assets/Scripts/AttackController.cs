@@ -86,9 +86,12 @@ public class AttackController : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        health -= dmg;
-        if (health <= 0) isAlive = false;
-
+        if (isAlive)
+        {
+            health -= dmg;
+            if (health <= 0) isAlive = false;
+        }
+        
         if (!isAlive) // Eğer öldüyse (daha önce ölmediyse)
         {
             animator.SetTrigger("isDead");

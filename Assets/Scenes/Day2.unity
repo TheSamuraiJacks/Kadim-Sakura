@@ -240,6 +240,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!4 &489521470 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3615237187319047580, guid: e611fa6a09de68348b34eb1340409fde,
+    type: 3}
+  m_PrefabInstance: {fileID: 1703447859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1241841404
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +283,8 @@ MonoBehaviour:
   currentAliveCount: 0
   totalSpawnedCount: 0
   spawnRange: 5
+  playerTransform: {fileID: 489521470}
+  dayCount: 0
 --- !u!4 &1241841406
 Transform:
   m_ObjectHideFlags: 0

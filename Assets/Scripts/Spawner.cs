@@ -20,6 +20,7 @@ public class Spawner : MonoBehaviour
     public float spawnRange = 10f;
     private Camera mainCamera;
     public Transform playerTransform;
+    public int dayCount = 0;
     // Singleton mantığına gerek yok ama düşmanların spawner'a ulaşması için referans lazım
     // Bu yüzden static bir instance tutabiliriz VEYA düşman doğarken ona spawner'ı verebiliriz.
     // Şimdilik en temizi: Düşman doğarken ona "Ben senin sahibinim" demek.
@@ -30,8 +31,12 @@ public class Spawner : MonoBehaviour
 
         // Spawn işlemini başlat
         InvokeRepeating(nameof(SpawnEnemy), 2f, spawnInterval);
+        DontDestroyOnLoad(this);
     }
-
+    private void OnEnable()
+    {
+        
+    }
     void SpawnEnemy()
     {
         // 1. KONTROL: Eğer o bölüm için belirlenen toplam sayıya ulaştıysak spawn'ı durdur.
