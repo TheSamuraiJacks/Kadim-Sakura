@@ -18,6 +18,8 @@ public class AttackController : MonoBehaviour
     public ParticleSystem slashVFX;
     // -----------------------------------------------------------
 
+    [HideInInspector] public Spawner mySpawner;
+
     private void Start()
     {
         foreach (var ability in abilityList)
@@ -87,9 +89,20 @@ public class AttackController : MonoBehaviour
         health -= dmg;
         if (health <= 0) isAlive = false;
 
-        if (isAlive)
+        if (!isAlive) // Eğer öldüyse (daha önce ölmediyse)
         {
             animator.SetTrigger("isDead");
+
+            // 2. BU KODU ÖLÜM KISMINA EKLE:
+            // Spawner'a "Ben öldüm, sayımdan düş" diyoruz.
+            if (mySpawner != null)
+            {
+                mySpawner.OnEnemyKilled();
+                mySpawner = null; // Tekrar tekrar çağırmasın diye bağlantıyı kopar
+            }
+
+            // Destroy veya diğer işlemler...
+            Destroy(gameObject, 5f); // Örnek
         }
     }
 }

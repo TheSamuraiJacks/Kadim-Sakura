@@ -5,23 +5,48 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [Header("Enemy Settings")]
-    public GameObject evilSamuraiPrefab; // Buraya EvilSamurai prefabını sürükle
-    public float spawnInterval = 5f;     // Kaç saniyede bir çıkacağı
+    public GameObject evilSamuraiPrefab;
+    public float spawnInterval = 5f;
+
+    [Header("Optimization Settings")]
+    public int totalEnemiesToSpawn = 8;    // O bölümde toplam kaç düşman çıkacak (Quota)
+    public int maxConcurrentEnemies = 5;   // Aynı anda sahnede en fazla kaç düşman olabilir
+
+    // Takip değişkenleri (Inspector'da görmen için Serialized yaptım ama private kalsınlar)
+    [SerializeField] private int currentAliveCount = 0;   // Şu an yaşayan sayısı
+    [SerializeField] private int totalSpawnedCount = 0;   // Toplam doğmuş olan sayısı
 
     [Header("Area Settings")]
-    public float spawnRange = 10f;       // Alan genişliği
+    public float spawnRange = 10f;
     private Camera mainCamera;
+
+    // Singleton mantığına gerek yok ama düşmanların spawner'a ulaşması için referans lazım
+    // Bu yüzden static bir instance tutabiliriz VEYA düşman doğarken ona spawner'ı verebiliriz.
+    // Şimdilik en temizi: Düşman doğarken ona "Ben senin sahibinim" demek.
 
     void Start()
     {
-        mainCamera = Camera.main; // Sahnedeki ana kamerayı bul
+        mainCamera = Camera.main;
 
-        // Fonksiyon ismini string yerine nameof() ile çağırmak hata yapmanı engeller
+        // Spawn işlemini başlat
         InvokeRepeating(nameof(SpawnEnemy), 2f, spawnInterval);
     }
 
     void SpawnEnemy()
     {
+        // 1. KONTROL: Eğer o bölüm için belirlenen toplam sayıya ulaştıysak spawn'ı durdur.
+        if (totalSpawnedCount >= totalEnemiesToSpawn)
+        {
+            CancelInvoke(nameof(SpawnEnemy));
+            return;
+        }
+
+        // 2. KONTROL: Eğer sahnede zaten maksimum sayıda düşman varsa, yeni üretme, bekle.
+        if (currentAliveCount >= maxConcurrentEnemies)
+        {
+            return;
+        }
+
         FindPositionAndSpawn();
     }
 
@@ -31,14 +56,12 @@ public class Spawner : MonoBehaviour
         bool isValidPosition = false;
         int attempts = 0;
 
-        // Kameranın görmediği bir yer bulana kadar 10 kere dener
         while (!isValidPosition && attempts < 10)
         {
             float randomX = Random.Range(-spawnRange, spawnRange);
             float randomZ = Random.Range(-spawnRange, spawnRange);
             spawnPosition = new Vector3(randomX, 0, randomZ);
 
-            // Eğer bu nokta ekranda GÖRÜNMÜYORSA, yer uygundur
             if (!IsVisibleToCamera(spawnPosition))
             {
                 isValidPosition = true;
@@ -46,32 +69,47 @@ public class Spawner : MonoBehaviour
             attempts++;
         }
 
-        // Eğer uygun yer bulduysak (veya 10 deneme bittiyse) üret
         if (isValidPosition)
         {
-            Instantiate(evilSamuraiPrefab, spawnPosition, Quaternion.identity);
+            // Düşmanı oluşturuyoruz
+            GameObject newEnemy = Instantiate(evilSamuraiPrefab, spawnPosition, Quaternion.identity);
+
+            // --- KRİTİK NOKTA ---
+            // Düşman scriptine ulaşıp, "Sen ölünce bana haber ver" dememiz lazım.
+            // Senin düşman scriptinin adı "AttackController" idi, ona göre yazıyorum:
+            AttackController enemyScript = newEnemy.GetComponent<AttackController>();
+            if (enemyScript != null)
+            {
+                enemyScript.mySpawner = this; // Düşmana spawner referansını veriyoruz
+            }
+
+            // Sayaçları güncelle
+            currentAliveCount++;
+            totalSpawnedCount++;
         }
     }
 
-    // Bir noktanın kamerada görünüp görünmediğini kontrol eden fonksiyon
+    // Bu fonksiyonu Düşman (AttackController) scriptinden çağıracağız!
+    public void OnEnemyKilled()
+    {
+        currentAliveCount--; // Yaşayan sayısını azalt ki yerine yenisi doğabilsin.
+
+        // Güvenlik önlemi: Eksiye düşerse 0'a eşitle
+        if (currentAliveCount < 0) currentAliveCount = 0;
+    }
+
     bool IsVisibleToCamera(Vector3 position)
     {
         Vector3 viewPos = mainCamera.WorldToViewportPoint(position);
-
-        // Viewport koordinatlarında (0,0) sol alt, (1,1) sağ üsttür.
-        // Eğer nokta 0 ile 1 arasındaysa ekrandadır.
         bool xInView = viewPos.x > 0 && viewPos.x < 1;
         bool yInView = viewPos.y > 0 && viewPos.y < 1;
-        bool isInFront = viewPos.z > 0; // Kameranın önünde mi?
-
+        bool isInFront = viewPos.z > 0;
         return xInView && yInView && isInFront;
     }
 
-    // Editörde spawn alanını görebilmen için yardımcı çizim (Gizmos)
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        // Alanı temsil eden tel kafes küp çizer
         Gizmos.DrawWireCube(new Vector3(0, 0, 0), new Vector3(spawnRange * 2, 1, spawnRange * 2));
     }
 }
