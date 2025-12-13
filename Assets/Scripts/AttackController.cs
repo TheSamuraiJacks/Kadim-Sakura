@@ -66,5 +66,16 @@ public class AttackController : MonoBehaviour
         animator.SetTrigger("isBlocking 0");
         animator.SetBool("isBlocking", true);
     }
+    
+    public void TakeDamage(float dmg)
+    {
+        health -= dmg;
+        if(health <= 0) isAlive = false;
+
+        if (isAlive)
+        {
+            animator.SetTrigger("isDead");
+        }
+    }
 
 }

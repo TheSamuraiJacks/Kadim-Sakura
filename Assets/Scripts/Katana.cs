@@ -9,7 +9,11 @@ public class Katana : MonoBehaviour
     {
         if (other.gameObject.tag == TagName)
         {
+            if(other.gameObject.GetComponent<Enemy>() != null)
             other.gameObject.GetComponent<Enemy>().TakeDamage(10);
+
+            if(other.gameObject.GetComponent<AttackController>() != null)
+            other.gameObject.GetComponent<AttackController>().TakeDamage(10);
         }
     }
 }

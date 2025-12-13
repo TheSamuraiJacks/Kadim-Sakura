@@ -225,7 +225,7 @@ public class CrControllerRoot : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
 
         // followTarget ayarý
-        followTarget.transform.rotation = Quaternion.Lerp(followTarget.transform.rotation, transform.rotation, Time.deltaTime * rotPower);
+        transform.rotation = Quaternion.Lerp(transform.rotation, followTarget.transform.rotation,  Time.deltaTime * rotPower);
     }
 
     // *** ARKA PLAN MÜZÝÐÝ FONKSÝYONLARI ***

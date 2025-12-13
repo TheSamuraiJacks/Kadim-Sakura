@@ -27,18 +27,17 @@ public class CamFollowTarget : MonoBehaviour
 
         if (!target.GetComponent<CrControllerRoot>().isMoving)
         {
-
             //Sað-Sol Rotasyon
             yRotation += mouseX;
 
-            //Yukarý-Aþaðý Rotasyon
-            xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-            Quaternion targetRot = Quaternion.Euler(xRotation, yRotation, 0);
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRot, Time.deltaTime * rotPower);
         }
-        
+
+        //Yukarý-Aþaðý Rotasyon
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        Quaternion targetRot = Quaternion.Euler(xRotation, yRotation, 0);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRot, Time.deltaTime * rotPower);
 
         //Hareket
         if (transform.position != target.transform.position)
