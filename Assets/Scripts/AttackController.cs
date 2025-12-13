@@ -43,27 +43,30 @@ public class AttackController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            Attack();
-
-
-        if (Input.GetMouseButtonDown(1))
-            Block();
-
-
-        if (Input.GetMouseButtonUp(1))
-            animator.SetBool("isBlocking", false);
-
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (isAlive)
         {
-            if (abilityList[0] != null)
-                abilityList[0].Use();
-        }
+            if (Input.GetMouseButtonDown(0))
+                Attack();
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (abilityList[1] != null)
-                abilityList[1].Use();
+
+            if (Input.GetMouseButtonDown(1))
+                Block();
+
+
+            if (Input.GetMouseButtonUp(1))
+                animator.SetBool("isBlocking", false);
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (abilityList[0] != null)
+                    abilityList[0].Use();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (abilityList[1] != null)
+                    abilityList[1].Use();
+            }
         }
     }
 
@@ -100,20 +103,25 @@ public class AttackController : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        health -= dmg;
-        if (health <= 0) isAlive = false;
-
-        if (!isAlive)
+        if (isAlive)
         {
-            animator.SetTrigger("isDead");
+            health -= dmg;
+            animator.SetTrigger("isHurt");
+            if (health <= 0) isAlive = false;
 
-            if (mySpawner != null)
+            if (!isAlive)
             {
-                mySpawner.OnEnemyKilled();
-                mySpawner = null;
-            }
+                animator.SetTrigger("isDead");
 
-            Destroy(gameObject, 5f);
+                if (mySpawner != null)
+                {
+                    mySpawner.OnEnemyKilled();
+                    mySpawner = null;
+                }
+
+                Destroy(gameObject, 5f);
+            }
         }
+        
     }
 }

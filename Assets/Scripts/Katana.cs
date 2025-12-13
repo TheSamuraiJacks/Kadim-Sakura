@@ -34,7 +34,7 @@ public class Katana : MonoBehaviour
             // Diğer kırılabilir objeler vs.
             if(other.gameObject.GetComponent<AttackController>() != null)
             {
-                other.gameObject.GetComponent<AttackController>().TakeDamage(10);
+                other.gameObject.GetComponent<AttackController>().TakeDamage(1);
                 // Burası isEnemy'yi true YAPMAZ, böylece ses çalmaz
             }
 
