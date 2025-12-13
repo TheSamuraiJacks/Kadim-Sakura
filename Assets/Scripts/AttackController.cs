@@ -13,15 +13,24 @@ public class AttackController : MonoBehaviour
 
     public IAbility[] abilityList;
 
-    // --- EKLEME 1: VFX'i bağlayacağımız kutuyu oluşturuyoruz ---
     [Header("Efekt Ayarları")]
     public ParticleSystem slashVFX;
-    // -----------------------------------------------------------
+
+    [Header("Ses Ayarları")]
+    public AudioClip attackSound; // Saldırı sesi
+    private AudioSource audioSource;
 
     [HideInInspector] public Spawner mySpawner;
 
     private void Start()
     {
+        // AudioSource bileşenini al veya ekle
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         foreach (var ability in abilityList)
         {
             if (ability != null)
@@ -70,12 +79,17 @@ public class AttackController : MonoBehaviour
 
         animator.SetTrigger("isAttacked");
 
-        // --- EKLEME 2: Saldırı anında efekti çalıştırıyoruz ---
+        // Efekti oynat
         if (slashVFX != null)
         {
-            slashVFX.Play(); // Efekti oynat
+            slashVFX.Play();
         }
-        // -----------------------------------------------------
+
+        // Sesi çal
+        if (audioSource != null && attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound);
+        }
     }
 
     void Block()
@@ -86,26 +100,20 @@ public class AttackController : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        if (isAlive)
-        {
-            health -= dmg;
-            if (health <= 0) isAlive = false;
-        }
-        
-        if (!isAlive) // Eğer öldüyse (daha önce ölmediyse)
+        health -= dmg;
+        if (health <= 0) isAlive = false;
+
+        if (!isAlive)
         {
             animator.SetTrigger("isDead");
 
-            // 2. BU KODU ÖLÜM KISMINA EKLE:
-            // Spawner'a "Ben öldüm, sayımdan düş" diyoruz.
             if (mySpawner != null)
             {
                 mySpawner.OnEnemyKilled();
-                mySpawner = null; // Tekrar tekrar çağırmasın diye bağlantıyı kopar
+                mySpawner = null;
             }
 
-            // Destroy veya diğer işlemler...
-            Destroy(gameObject, 5f); // Örnek
+            Destroy(gameObject, 5f);
         }
     }
 }
