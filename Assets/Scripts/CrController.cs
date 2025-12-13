@@ -15,7 +15,7 @@ public class CrController : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
-    [SerializeField] private CharacterController controller;
+    //[SerializeField] private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
 
@@ -29,7 +29,7 @@ public class CrController : MonoBehaviour
         GroundCheck();
         MovePlayer();
         Rotation();
-        // Z�plama
+        // Zıplama
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump();
@@ -53,11 +53,11 @@ public class CrController : MonoBehaviour
         // Y�n vekt�r�: ileri-geri + sa�-sol
         Vector3 move = transform.right * x + transform.forward * z;
 
-        // Ko�ma
+        // Koşma
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
         animator.SetBool("isRunning", Input.GetKey(KeyCode.LeftShift) ? true : false);
 
-        controller.Move(move * currentSpeed * Time.deltaTime);
+        //controller.Move(move * currentSpeed * Time.deltaTime);
         animator.SetFloat("XSpeed", x);
         animator.SetFloat("ZSpeed", z);
         
@@ -68,10 +68,10 @@ public class CrController : MonoBehaviour
             animator.SetFloat("GroundDistance", distance);
         }
 
-        // Yer�ekimi
+        // Yerçekimi
         velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime);
+        //controller.Move(velocity * Time.deltaTime);
     }
 
     public void Jump()
