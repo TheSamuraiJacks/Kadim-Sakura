@@ -225,7 +225,9 @@ public class CrControllerRoot : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
 
         // followTarget ayarý
+        Vector3 temp = transform.eulerAngles;
         transform.rotation = Quaternion.Lerp(transform.rotation, followTarget.transform.rotation,  Time.deltaTime * rotPower);
+        transform.eulerAngles = new Vector3(temp.x, transform.eulerAngles.y, temp.z);
     }
 
     // *** ARKA PLAN MÜZÝÐÝ FONKSÝYONLARI ***

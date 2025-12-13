@@ -25,13 +25,8 @@ public class CamFollowTarget : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        if (!target.GetComponent<CrControllerRoot>().isMoving)
-        {
-            //Sað-Sol Rotasyon
-            yRotation += mouseX;
-
-        }
-
+        //Sað-Sol Rotasyon
+        yRotation += mouseX;
         //Yukarý-Aþaðý Rotasyon
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
