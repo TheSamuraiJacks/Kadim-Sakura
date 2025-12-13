@@ -246,6 +246,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1703447859}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &549891017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5376555672768048091, guid: e611fa6a09de68348b34eb1340409fde,
+    type: 3}
+  m_PrefabInstance: {fileID: 1703447859}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ba397e9da87a44ebf5ba9173b1c00e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1241841404
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,9 +422,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4437869410619231435, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
+      propertyPath: katana
+      value: 
+      objectReference: {fileID: 549891017}
+    - target: {fileID: 4437869410619231435, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
       propertyPath: attackSound
       value: 
       objectReference: {fileID: 8300000, guid: 7e84e18f849da44da9ea04701d0026fd, type: 3}
+    - target: {fileID: 4437869410619231435, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: abilityList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: dce3121a09665a549b2366216c45973a,
+        type: 2}
     - target: {fileID: 4964008579148189822, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
       propertyPath: field of view
@@ -457,6 +480,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079154273719252611, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+        'mixamorig:LeftHandIndex1'\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform
+        'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform
+        'mixamorig:RightFoot'\n\tTransform 'mixamorig:Head'\n\tand more ...\n\tFrom
+        animation clip 'Death'"
       objectReference: {fileID: 0}
     - target: {fileID: 9117305255879739414, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}

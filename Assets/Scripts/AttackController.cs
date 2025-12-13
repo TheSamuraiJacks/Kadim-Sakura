@@ -22,6 +22,8 @@ public class AttackController : MonoBehaviour
 
     [HideInInspector] public Spawner mySpawner;
 
+    public Katana katana;
+
     private void Start()
     {
         // AudioSource bileşenini al veya ekle
@@ -72,6 +74,7 @@ public class AttackController : MonoBehaviour
 
     void Attack()
     {
+        katana.ChangeDamage(10);
         attackForce++;
         if (attackForce > 2) attackForce = 0;
 

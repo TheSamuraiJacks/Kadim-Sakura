@@ -8,6 +8,8 @@ public class Katana : MonoBehaviour
     public AudioClip hitSound; // Ses dosyası
     private AudioSource audioSource;
 
+    public float damageValue;
+
     void Start()
     {
         // AudioSource bileşenini al veya ekle
@@ -16,6 +18,12 @@ public class Katana : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+    }
+    
+    public void ChangeDamage(float dmg)
+    {
+        damageValue = dmg;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,14 +35,14 @@ public class Katana : MonoBehaviour
             // Düşman kontrolü
             if(other.gameObject.GetComponent<Enemy>() != null)
             {
-                other.gameObject.GetComponent<Enemy>().TakeDamage(10);
+                other.gameObject.GetComponent<Enemy>().TakeDamage(damageValue);
                 isEnemy = true; // Sadece düşmansa true yap
             }
 
             // Diğer kırılabilir objeler vs.
             if(other.gameObject.GetComponent<AttackController>() != null)
             {
-                other.gameObject.GetComponent<AttackController>().TakeDamage(1);
+                other.gameObject.GetComponent<AttackController>().TakeDamage(damageValue);
                 // Burası isEnemy'yi true YAPMAZ, böylece ses çalmaz
             }
 
