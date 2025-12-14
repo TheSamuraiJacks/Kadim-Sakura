@@ -68,7 +68,6 @@ public class Spawner : MonoBehaviour
             if(playerTransform != null)
                 spawnPosition = new Vector3(playerTransform.position.x + randomX, 0, playerTransform.position.z + randomZ);
             
-            Debug.Log(spawnPosition);
             if (!IsVisibleToCamera(spawnPosition))
             {
                 isValidPosition = true;

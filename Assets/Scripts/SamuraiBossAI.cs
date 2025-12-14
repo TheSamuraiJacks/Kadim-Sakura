@@ -6,7 +6,7 @@ using UnityEngine.AI; // BU SATIR EKSİKTİ (NavMesh için şart)
 public class SamuraiBossAI : MonoBehaviour
 {
     [Header("Gerekli Bileşenler")]
-    public Transform player;          // Kovalayacağı oyuncu
+    public Transform player;// Kovalayacağı oyuncu
 
     // --- DÜZELTME BURADA ---
     // Eski hali: public BossSkill bossSkillScript;
@@ -97,12 +97,6 @@ public class SamuraiBossAI : MonoBehaviour
 
     void PerformSkill()
     {
-        // 1. Ajanı tamamen kapatıyoruz. Artık bizi geri çekemez.
-        agent.enabled = false;
-
-        // 2. Kontrolü tamamen animasyona (kök hareketine) bırakıyoruz.
-        animator.applyRootMotion = true;
-
         FaceTarget(); // Son kez dön
 
         // Skill kodunu çağır
@@ -117,11 +111,7 @@ public class SamuraiBossAI : MonoBehaviour
     // Animation Event ile çağrılan fonksiyon
     public void FinishSkill()
     {
-        // 3. Önce Animasyonun fizik kontrolünü kapat
-        animator.applyRootMotion = false;
 
-        // 4. Ajanı tekrar aç (Açıldığı an karakterin şimdiki konumunu kabul eder)
-        agent.enabled = true;
 
         // 5. Küçük bir temizlik (Hızını sıfırla ki kaymasın)
         if (agent.isOnNavMesh)
