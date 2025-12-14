@@ -15,6 +15,11 @@ public class Enemy : MonoBehaviour
     // GameManager yoksa burayı elle atamak zorunda kalma diye opsiyonel yaptım
     public int scoreValue = 10;
 
+    // --- YENİ EKLENDİ: SPAWNER BAĞLANTISI ---
+    // Spawner bu değişkene ulaşıp "Ben senin sahibinim" diyecek.
+    public Spawner mySpawner;
+    // ----------------------------------------
+
     private NavMeshAgent agent;
     private Transform player;
     private Animator anim;
@@ -58,7 +63,7 @@ public class Enemy : MonoBehaviour
                 agent.isStopped = true; // Dur
                 anim.SetBool("IsMoving", false);
 
-                // --- YENİ EKLENEN KISIM: YÜZÜNÜ OYUNCUYA DÖN ---
+                // --- YÜZÜNÜ OYUNCUYA DÖN ---
                 // Y eksenini sıfırlıyoruz ki havaya/yere bakmasın
                 Vector3 direction = (player.position - transform.position).normalized;
                 direction.y = 0;
@@ -85,7 +90,7 @@ public class Enemy : MonoBehaviour
                 agent.SetDestination(player.position);
             }
         }
-       
+
     }
 
     void AttackPlayer()
@@ -101,7 +106,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= amount;
 
         // İstersen buraya "Hit" animasyonu (Impact) ekleyebilirsin
-         anim.SetTrigger("Hit"); 
+        anim.SetTrigger("Hit");
 
         if (currentHealth <= 0)
         {
@@ -113,8 +118,13 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
 
-        // Puan ekleme (GameManager varsa)
-        // if (GameManager.instance != null) GameManager.instance.AddScore(scoreValue);
+        // --- YENİ EKLENDİ: SPAWNER'A HABER VER ---
+        // "Ben öldüm, sayıdan düş ve yeni adam yolla" diyoruz.
+        if (mySpawner != null)
+        {
+            mySpawner.OnEnemyKilled();
+        }
+        // -----------------------------------------
 
         agent.isStopped = true;
         agent.enabled = false;
@@ -122,7 +132,7 @@ public class Enemy : MonoBehaviour
 
         anim.SetTrigger("Die");
         Instantiate(orbPrefab).transform.position = transform.position + Vector3.up * 0.5f;
-        Destroy(gameObject, 3f);
 
+        Destroy(gameObject, 3f);
     }
 }
