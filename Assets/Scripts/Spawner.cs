@@ -25,22 +25,8 @@ public class Spawner : MonoBehaviour
     {
         mainCamera = Camera.main;
         InvokeRepeating(nameof(SpawnEnemy), 2f, spawnInterval);
-<<<<<<< Updated upstream
-        DontDestroyOnLoad(this);
-    }
-    private void Update()
-    {
-        if (totalSpawnedCount >= totalEnemiesToSpawn)
-        {
-            DayManaging.instance.UploadScene();
-        }
-        
-=======
 
-        // DontDestroyOnLoad genelde Managerlar içindir, Spawner her sahnede
-        // ayrı olacağı için bunu kapatıyorum, yoksa sahneler arası karışıklık çıkarabilir.
-        // DontDestroyOnLoad(this); 
->>>>>>> Stashed changes
+        // DontDestroyOnLoad managerlar içindir, burada kapatıyoruz.
     }
 
     void SpawnEnemy()
@@ -48,24 +34,19 @@ public class Spawner : MonoBehaviour
         // 1. KONTROL: Toplam kota doldu mu?
         if (totalSpawnedCount >= totalEnemiesToSpawn)
         {
-<<<<<<< Updated upstream
-            CancelInvoke(nameof(SpawnEnemy));
-=======
-            // BURASI ÖNEMLİ: Kota doldu ama hemen leveli bitirme!
-            // Sadece yaşayanların ölmesini bekle.
+            // KOTA DOLDU: Sadece yaşayanların ölmesini bekle.
             // Eğer kimse kalmadıysa o zaman leveli bitir.
             if (currentAliveCount <= 0)
             {
                 CancelInvoke(nameof(SpawnEnemy));
                 Debug.Log("Tüm düşmanlar öldü, diğer güne geçiliyor...");
 
-                // DayManager'da sahne geçişi yapacak fonksiyonun varsa çağır
+                // DayManager'da sahne geçişi yapacak fonksiyon
                 if (DayManaging.instance != null)
                     DayManaging.instance.UploadScene();
             }
 
             // Kota dolduysa yeni düşman üretme, fonksiyondan çık
->>>>>>> Stashed changes
             return;
         }
 
@@ -102,12 +83,14 @@ public class Spawner : MonoBehaviour
         {
             GameObject newEnemy = Instantiate(evilSamuraiPrefab, spawnPosition, Quaternion.identity);
 
-            // Düşmana "Ben senin sahibinim" diyoruz
-            AttackController enemyScript = newEnemy.GetComponent<AttackController>();
+            // --- DÜZELTİLEN KISIM ---
+            // Düşmanın üzerindeki script 'Enemy' olduğu için onu arıyoruz
+            Enemy enemyScript = newEnemy.GetComponent<Enemy>();
             if (enemyScript != null)
             {
-                enemyScript.mySpawner = this;
+                enemyScript.mySpawner = this; // Sahibini tanıttık
             }
+            // ------------------------
 
             currentAliveCount++;
             totalSpawnedCount++;
@@ -118,9 +101,6 @@ public class Spawner : MonoBehaviour
     {
         currentAliveCount--;
         if (currentAliveCount < 0) currentAliveCount = 0;
-
-        // Biri öldüğü an "Hadi hemen yenisini basalım" diye Invoke'u beklemeden tetikleyebilirsin (Opsiyonel)
-        // SpawnEnemy(); 
     }
 
     bool IsVisibleToCamera(Vector3 position)
