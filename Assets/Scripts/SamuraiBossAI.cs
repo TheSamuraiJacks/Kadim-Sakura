@@ -48,33 +48,36 @@ public class SamuraiBossAI : MonoBehaviour
     void Update()
     {
         if (player == null) return;
+        if (isAlive)
+        {
+            // 1. Oyuncuyla aradaki mesafeyi ölç
+            distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // 1. Oyuncuyla aradaki mesafeyi ölç
-        distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            // 2. Animasyon için hız bilgisini gönder (Idle/Run geçişi için)
+            // NavMesh hızı 0.1'den büyükse koşuyordur
+            animator.SetBool("IsMoving", agent.velocity.magnitude > 0.1f);
 
-        // 2. Animasyon için hız bilgisini gönder (Idle/Run geçişi için)
-        // NavMesh hızı 0.1'den büyükse koşuyordur
-        animator.SetBool("IsMoving", agent.velocity.magnitude > 0.1f);
-
-        // KARAR MEKANİZMASI
-        if (distanceToPlayer <= skillRange && distanceToPlayer > 3f && Time.time >= nextSkillTime)
-        {
-            PerformSkill();
+            // KARAR MEKANİZMASI
+            if (distanceToPlayer <= skillRange && distanceToPlayer > 3f && Time.time >= nextSkillTime)
+            {
+                PerformSkill();
+            }
+            else if (distanceToPlayer <= attackRange && Time.time >= nextAttackTime)
+            {
+                PerformAttack();
+            }
+            else if (distanceToPlayer <= chaseRange)
+            {
+                // Hiçbiri değilse ve menzildeyse: KOVALA
+                ChasePlayer();
+            }
+            else
+            {
+                // Oyuncu çok uzaktaysa: DUR
+                agent.isStopped = true;
+            }
         }
-        else if (distanceToPlayer <= attackRange && Time.time >= nextAttackTime)
-        {
-            PerformAttack();
-        }
-        else if (distanceToPlayer <= chaseRange)
-        {
-            // Hiçbiri değilse ve menzildeyse: KOVALA
-            ChasePlayer();
-        }
-        else
-        {
-            // Oyuncu çok uzaktaysa: DUR
-            agent.isStopped = true;
-        }
+        
     }
 
     public void TakeDamage(float damage)

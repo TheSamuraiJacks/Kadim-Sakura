@@ -2,11 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class IAbility : ScriptableObject
-{
-    public abstract void Preparation(GameObject go);
-    public abstract void Use();
-}
 [CreateAssetMenu(menuName = "CreateAbility/Teleport")]
 public class Teleport : IAbility
 {
@@ -35,21 +30,7 @@ public class Teleport : IAbility
             TeleportAvaible = false;
         }
     }
-    public override void Preparation(GameObject go)
-    {
-        this.go = go;
-    }
-}
-[CreateAssetMenu(menuName = "CreateAbility/Dash")]
-public class Dash : IAbility
-{
-    GameObject go;
 
-    public override void Use()
-    {
-        go.GetComponent<Animator>().SetTrigger("isDashed");
-        go.GetComponent<AttackController>().katana.ChangeDamage(20);
-    }
     public override void Preparation(GameObject go)
     {
         this.go = go;
