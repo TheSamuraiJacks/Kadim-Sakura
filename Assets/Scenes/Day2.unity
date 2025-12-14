@@ -240,6 +240,24 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!4 &489521470 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3615237187319047580, guid: e611fa6a09de68348b34eb1340409fde,
+    type: 3}
+  m_PrefabInstance: {fileID: 1703447859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &549891017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5376555672768048091, guid: e611fa6a09de68348b34eb1340409fde,
+    type: 3}
+  m_PrefabInstance: {fileID: 1703447859}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ba397e9da87a44ebf5ba9173b1c00e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1241841404
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,8 +289,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   evilSamuraiPrefab: {fileID: 3977557210713641212, guid: 805d49759dbf3f74ea97c093db5cac53,
     type: 3}
-  spawnInterval: 5
+  spawnInterval: 1
+  totalEnemiesToSpawn: 3
+  maxConcurrentEnemies: 3
+  currentAliveCount: 0
+  totalSpawnedCount: 0
   spawnRange: 5
+  playerTransform: {fileID: 489521470}
+  dayCount: 0
 --- !u!4 &1241841406
 Transform:
   m_ObjectHideFlags: 0
@@ -315,6 +339,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.1500015
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103678260979743162, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: musicVolume
+      value: 0.153
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103678260979743162, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: footstepVolume
+      value: 0.634
       objectReference: {fileID: 0}
     - target: {fileID: 3615237187319047580, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
@@ -386,11 +420,32 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4437869410619231435, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: katana
+      value: 
+      objectReference: {fileID: 549891017}
+    - target: {fileID: 4437869410619231435, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7e84e18f849da44da9ea04701d0026fd, type: 3}
+    - target: {fileID: 4437869410619231435, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: abilityList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: dce3121a09665a549b2366216c45973a,
+        type: 2}
     - target: {fileID: 4964008579148189822, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
       propertyPath: field of view
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 5376555672768048091, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7c017088fafa14144a6960fbebabaae9, type: 3}
     - target: {fileID: 5413611340303311123, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -426,6 +481,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9079154273719252611, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+        'mixamorig:LeftHandIndex1'\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform
+        'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform
+        'mixamorig:RightFoot'\n\tTransform 'mixamorig:Head'\n\tand more ...\n\tFrom
+        animation clip 'Death'"
+      objectReference: {fileID: 0}
     - target: {fileID: 9117305255879739414, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
       propertyPath: ShoulderOffset.y
@@ -444,15 +510,40 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 588419705642253745, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 977219694782244947, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3296252916050112482, guid: 25af79b4c68965748b8e0630376933bf,
         type: 3}
       propertyPath: m_Name
       value: PointC
       objectReference: {fileID: 0}
+    - target: {fileID: 3311925801284352000, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3321695830330172348, guid: 25af79b4c68965748b8e0630376933bf,
         type: 3}
       propertyPath: m_Name
       value: PointB
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886908695842850407, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939630161638181668, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4009409692630354710, guid: 25af79b4c68965748b8e0630376933bf,
         type: 3}
@@ -463,6 +554,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: map
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841614380911576712, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6055197926160584881, guid: 25af79b4c68965748b8e0630376933bf,
         type: 3}
@@ -514,10 +610,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6071834267498125212, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740033362587770435, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7035414148420243133, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7658103260794094063, guid: 25af79b4c68965748b8e0630376933bf,
         type: 3}
       propertyPath: m_Name
       value: PointD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035082467587076871, guid: 25af79b4c68965748b8e0630376933bf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

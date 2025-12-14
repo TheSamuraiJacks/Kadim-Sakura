@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: New Teleport
   m_EditorClassIdentifier: Assembly-CSharp::Teleport
   teleportSpeed: 10
+  prefab: {fileID: 7919298824968409459, guid: 18c54ae0c5d6d22419bd8b2c802ede94, type: 3}

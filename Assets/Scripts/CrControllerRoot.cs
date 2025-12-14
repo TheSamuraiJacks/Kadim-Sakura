@@ -72,11 +72,6 @@ public class CrControllerRoot : MonoBehaviour
         GroundCheck();
         MovePlayer();
 
-        // Zýplama
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            Jump();
-        }
     }
 
     void GroundCheck()
@@ -196,22 +191,6 @@ public class CrControllerRoot : MonoBehaviour
         }
     }
 
-    public void Jump()
-    {
-        if (isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            animator.SetTrigger("isJumped");
-
-            // Zýplarken yürüme sesini durdur
-            StopFootstepSound();
-
-            if (AudioManager.instance != null)
-            {
-                AudioManager.instance.Play("Jump");
-            }
-        }
-    }
 
     public void Rotation()
     {

@@ -13,13 +13,26 @@ public class AttackController : MonoBehaviour
 
     public IAbility[] abilityList;
 
-    // --- EKLEME 1: VFX'i bağlayacağımız kutuyu oluşturuyoruz ---
     [Header("Efekt Ayarları")]
     public ParticleSystem slashVFX;
-    // -----------------------------------------------------------
+
+    [Header("Ses Ayarları")]
+    public AudioClip attackSound; // Saldırı sesi
+    private AudioSource audioSource;
+
+    [HideInInspector] public Spawner mySpawner;
+
+    public Katana katana;
 
     private void Start()
     {
+        // AudioSource bileşenini al veya ekle
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         foreach (var ability in abilityList)
         {
             if (ability != null)
@@ -32,32 +45,36 @@ public class AttackController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            Attack();
-
-
-        if (Input.GetMouseButtonDown(1))
-            Block();
-
-
-        if (Input.GetMouseButtonUp(1))
-            animator.SetBool("isBlocking", false);
-
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (isAlive)
         {
-            if (abilityList[0] != null)
-                abilityList[0].Use();
-        }
+            if (Input.GetMouseButtonDown(0))
+                Attack();
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (abilityList[1] != null)
-                abilityList[1].Use();
+
+            if (Input.GetMouseButtonDown(1))
+                Block();
+
+
+            if (Input.GetMouseButtonUp(1))
+                animator.SetBool("isBlocking", false);
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (abilityList[0] != null)
+                    abilityList[0].Use();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (abilityList[1] != null)
+                    abilityList[1].Use();
+            }
         }
     }
 
     void Attack()
     {
+        katana.ChangeDamage(10);
         attackForce++;
         if (attackForce > 2) attackForce = 0;
 
@@ -68,12 +85,17 @@ public class AttackController : MonoBehaviour
 
         animator.SetTrigger("isAttacked");
 
-        // --- EKLEME 2: Saldırı anında efekti çalıştırıyoruz ---
+        // Efekti oynat
         if (slashVFX != null)
         {
-            slashVFX.Play(); // Efekti oynat
+            slashVFX.Play();
         }
-        // -----------------------------------------------------
+
+        // Sesi çal
+        if (audioSource != null && attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound);
+        }
     }
 
     void Block()
@@ -84,12 +106,25 @@ public class AttackController : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        health -= dmg;
-        if (health <= 0) isAlive = false;
-
         if (isAlive)
         {
-            animator.SetTrigger("isDead");
+            health -= dmg;
+            animator.SetTrigger("isHurt");
+            if (health <= 0) isAlive = false;
+
+            if (!isAlive)
+            {
+                animator.SetTrigger("isDead");
+
+                if (mySpawner != null)
+                {
+                    mySpawner.OnEnemyKilled();
+                    mySpawner = null;
+                }
+
+                Destroy(gameObject, 5f);
+            }
         }
+        
     }
 }

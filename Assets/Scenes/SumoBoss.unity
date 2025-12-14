@@ -388,6 +388,10 @@ MonoBehaviour:
   evilSamuraiPrefab: {fileID: 3977557210713641212, guid: bdd136794e2143a48a7e4e29150d9d51,
     type: 3}
   spawnInterval: 5
+  totalEnemiesToSpawn: 4
+  maxConcurrentEnemies: 2
+  currentAliveCount: 0
+  totalSpawnedCount: 0
   spawnRange: 10
 --- !u!114 &563701885
 MonoBehaviour:
@@ -676,6 +680,10 @@ MonoBehaviour:
   evilSamuraiPrefab: {fileID: 3977557210713641212, guid: bdd136794e2143a48a7e4e29150d9d51,
     type: 3}
   spawnInterval: 10
+  totalEnemiesToSpawn: 8
+  maxConcurrentEnemies: 5
+  currentAliveCount: 0
+  totalSpawnedCount: 0
   spawnRange: 10
 --- !u!1 &599755388
 GameObject:
