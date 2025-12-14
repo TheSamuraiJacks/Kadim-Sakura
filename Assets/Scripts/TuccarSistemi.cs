@@ -112,8 +112,8 @@ public class TuccarSistemi : MonoBehaviour
 
         // Yeni fiyatlarý etiketlere yaz
         // "\n" alt satýra geçmek demektir.
-        canFiyatiText.text = "CAN YENILE\nFiyat: " + canFiyati.ToString();
-        hasarFiyatiText.text = "GÜÇLENDIRME\nFiyat: " + hasarFiyati.ToString();
+        canFiyatiText.text = "CAN YENILE Fiyat: " + canFiyati.ToString();
+        hasarFiyatiText.text = "GÜÇLENDIRME Fiyat: " + hasarFiyati.ToString();
     }
 
     
