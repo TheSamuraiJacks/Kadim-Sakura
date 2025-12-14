@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class DayManaging : MonoBehaviour
 {
+    public static DayManaging instance;
+    private void Awake()
+    {
+        instance = this;
+    }
     public void UploadScene()
     {
         int currentIndex = SceneManager.GetActiveScene().buildIndex;

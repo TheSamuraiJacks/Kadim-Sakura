@@ -74,6 +74,9 @@ public class IntroManager : MonoBehaviour
             sesKaynagi.Stop(); // Eski sesi sustur
             sesKaynagi.clip = sesEfektleri[suankiSira];
             sesKaynagi.Play(); // Yenisini çal
+        }else if(sesEfektleri.Length == suankiSira)
+        {
+            DayManaging.instance.UploadScene();
         }
     }
 }
