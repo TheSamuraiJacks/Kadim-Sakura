@@ -44,6 +44,12 @@ public class Katana : MonoBehaviour
                 other.gameObject.GetComponent<SamuraiBossAI>().TakeDamage(damageValue);
                 isEnemy = true; // Sadece düşmansa true yap
             }
+            // Düşman kontrolü
+            if(other.gameObject.GetComponent<StaticSummonerBoss>() != null)
+            {
+                other.gameObject.GetComponent<StaticSummonerBoss>().TakeDamage(damageValue);
+                isEnemy = true; // Sadece düşmansa true yap
+            }
 
             // Diğer kırılabilir objeler vs.
             if(other.gameObject.GetComponent<AttackController>() != null)
