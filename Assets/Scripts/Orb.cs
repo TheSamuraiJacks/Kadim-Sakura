@@ -25,7 +25,7 @@ public class Orb : MonoBehaviour
 
         if (go.tag == "Player")
         {
-            go.GetComponent<AttackController>().health += gainValue;
+            PlayerPrefs.SetFloat("GainedOrbValue", gainValue);
             Destroy(gameObject);
         }
     }
