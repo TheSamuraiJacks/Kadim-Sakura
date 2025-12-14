@@ -48,40 +48,44 @@ public class Enemy : MonoBehaviour
     {
         if (isDead || player == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        // --- SALDIRI MENZİLİNDEYSEK ---
-        if (distanceToPlayer <= attackRange)
+        if (!isDead)
         {
-            agent.isStopped = true; // Dur
-            anim.SetBool("IsMoving", false);
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-            // --- YENİ EKLENEN KISIM: YÜZÜNÜ OYUNCUYA DÖN ---
-            // Y eksenini sıfırlıyoruz ki havaya/yere bakmasın
-            Vector3 direction = (player.position - transform.position).normalized;
-            direction.y = 0;
-            if (direction != Vector3.zero)
+            // --- SALDIRI MENZİLİNDEYSEK ---
+            if (distanceToPlayer <= attackRange)
             {
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                // Slerp ile yumuşakça dönmesini sağlıyoruz (5f dönüş hızıdır)
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+                agent.isStopped = true; // Dur
+                anim.SetBool("IsMoving", false);
+
+                // --- YENİ EKLENEN KISIM: YÜZÜNÜ OYUNCUYA DÖN ---
+                // Y eksenini sıfırlıyoruz ki havaya/yere bakmasın
+                Vector3 direction = (player.position - transform.position).normalized;
+                direction.y = 0;
+                if (direction != Vector3.zero)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(direction);
+                    // Slerp ile yumuşakça dönmesini sağlıyoruz (5f dönüş hızıdır)
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+                }
+                // -----------------------------------------------
+
+                // Saldırı zamanlaması
+                if (Time.time > lastAttackTime + attackSpeed)
+                {
+                    AttackPlayer();
+                    lastAttackTime = Time.time;
+                }
             }
-            // -----------------------------------------------
-
-            // Saldırı zamanlaması
-            if (Time.time > lastAttackTime + attackSpeed)
+            // --- UZAKTAYSAK (KOVALA) ---
+            else
             {
-                AttackPlayer();
-                lastAttackTime = Time.time;
+                agent.isStopped = false; // Yürü
+                anim.SetBool("IsMoving", true);
+                agent.SetDestination(player.position);
             }
         }
-        // --- UZAKTAYSAK (KOVALA) ---
-        else
-        {
-            agent.isStopped = false; // Yürü
-            anim.SetBool("IsMoving", true);
-            agent.SetDestination(player.position);
-        }
+       
     }
 
     void AttackPlayer()
@@ -114,11 +118,11 @@ public class Enemy : MonoBehaviour
 
         agent.isStopped = true;
         agent.enabled = false;
-        myCollider.enabled = false;
+        //myCollider.enabled = false;
 
         anim.SetTrigger("Die");
         Instantiate(orbPrefab).transform.position = transform.position + Vector3.up * 0.5f;
-        Destroy(gameObject, 4f);
+        Destroy(gameObject, 3f);
 
     }
 }

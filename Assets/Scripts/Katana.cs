@@ -8,7 +8,7 @@ public class Katana : MonoBehaviour
     public AudioClip hitSound; // Ses dosyası
     private AudioSource audioSource;
 
-    public float damageValue;
+    public float damageValue = 10;
 
     void Start()
     {
