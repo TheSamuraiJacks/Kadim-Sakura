@@ -6,6 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/UI(New).unity
+    guid: 7d38d3e2c427233438343c29a2ae8b51
+  - enabled: 1
+    path: Assets/Scenes/IntroStory.unity
+    guid: d61d732c2642e2c439504d3af502b55e
+  - enabled: 1
+    path: Assets/Scenes/Day1.unity
+    guid: 1c7d7f75e3d0af843a46cbdbd8c5dca7
+  - enabled: 1
+    path: Assets/Scenes/TeleportBoss.unity
+    guid: 40b681bedc36dab498390ba855b8faa7
+  - enabled: 1
+    path: Assets/Scenes/Day3.unity
+    guid: 3c9cac1f1aed2584fb0dbbd4d8cfa156
+  - enabled: 1
+    path: Assets/Scenes/DashBoss.unity
+    guid: 51f728473f5451d488e41ecaeacc052f
+  - enabled: 1
+    path: Assets/Scenes/Day5.unity
+    guid: 8846ab525e08e8e4abc288c204c68f7d
   m_configObjects: {}
