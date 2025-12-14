@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TagName: Player
+  hitSound: {fileID: 0}
 --- !u!4 &1791986218138853718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: dd2eb6d36ff22574f839de01478b8481,
@@ -812,8 +813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a7816ecdbe92f4e976062b576c3404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  damage: 10
+  maxHealth: 10
+  damage: 5
   attackSpeed: 1.5
   attackRange: 2
   scoreValue: 10
