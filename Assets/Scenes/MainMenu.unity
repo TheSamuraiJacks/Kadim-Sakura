@@ -228,14 +228,14 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129671348}
   m_LocalRotation: {x: 0, y: 0.043619405, z: 0, w: 0.9990483}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 261287203}
   m_LocalEulerAnglesHint: {x: 0, y: 5, z: 0}
-  m_AnchorMin: {x: 0.7364615, y: 0.51528096}
-  m_AnchorMax: {x: 0.95714146, y: 0.93184364}
+  m_AnchorMin: {x: 0.60326844, y: 0.26060423}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1083,7 +1083,7 @@ PrefabInstance:
     - target: {fileID: 351642387682386969, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
       propertyPath: m_text
-      value: "THE SAMURA\u0130 JACKS"
+      value: THE SAMURAI JACKS
       objectReference: {fileID: 0}
     - target: {fileID: 351642387682386969, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
@@ -1092,9 +1092,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 351642387682386969, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fcd7b311c4a4584aa91f500fdeb9484,
+        type: 2}
+    - target: {fileID: 351642387682386969, guid: 0a68be1bd13d8694e8d8fe85574ac075,
+        type: 3}
       propertyPath: m_textAlignment
       value: 65535
       objectReference: {fileID: 0}
+    - target: {fileID: 351642387682386969, guid: 0a68be1bd13d8694e8d8fe85574ac075,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8471832373279343426, guid: 3fcd7b311c4a4584aa91f500fdeb9484,
+        type: 2}
     - target: {fileID: 351642387682386969, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
       propertyPath: m_TextStyleHashCode
@@ -1105,11 +1117,22 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 4096
       objectReference: {fileID: 0}
+    - target: {fileID: 351642387682386969, guid: 0a68be1bd13d8694e8d8fe85574ac075,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 351642387682386974, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 351642387682386975, guid: 0a68be1bd13d8694e8d8fe85574ac075,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 8471832373279343426, guid: 3fcd7b311c4a4584aa91f500fdeb9484,
+        type: 2}
     - target: {fileID: 351642387760220674, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
       propertyPath: m_Mesh
@@ -1118,8 +1141,8 @@ PrefabInstance:
     - target: {fileID: 351642387760220685, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
       propertyPath: m_text
-      value: "\n\n\n\n\nZehra G\xFCrcan\nArda An\u0131l Morko\xE7\nYusuf \xDCveys
-        Kaplan\nSudenaz Ulusay\nAdil Umut Tuncer"
+      value: "\n\n\n\n\nZehra G\xFCrcan\nArda Anil Morko\xE7\nYusuf \xDCveys Kaplan\nSudenaz
+        Ulusay\nAdil Umut Tuncer"
       objectReference: {fileID: 0}
     - target: {fileID: 351642387760220685, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
@@ -1144,7 +1167,7 @@ PrefabInstance:
     - target: {fileID: 351642387760220685, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
       propertyPath: m_HorizontalAlignment
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 351642387760220686, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
