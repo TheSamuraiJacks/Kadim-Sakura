@@ -126,6 +126,7 @@ NavMeshSettings:
 PrefabInstance:
   m_ObjectHideFlags: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2160,6 +2161,9 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 =======
   serializedVersion: 2
+=======
+  serializedVersion: 2
+>>>>>>> Stashed changes
   m_Modification:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
@@ -2224,6 +2228,9 @@ CanvasRenderer:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ae3caa1f3fe2c74a8a4ed5980132e94, type: 3}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
