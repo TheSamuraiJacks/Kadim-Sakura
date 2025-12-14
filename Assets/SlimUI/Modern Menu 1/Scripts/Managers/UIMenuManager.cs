@@ -117,6 +117,11 @@ namespace SlimUI.ModernMenu{
 			}
 		}
 
+		public void PlayGame()
+		{
+			DayManaging.instance.UploadScene();
+		}
+
 		public void PlayCampaign(){
 			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);

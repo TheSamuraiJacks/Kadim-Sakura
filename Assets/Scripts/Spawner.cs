@@ -43,6 +43,7 @@ public class Spawner : MonoBehaviour
         if (totalSpawnedCount >= totalEnemiesToSpawn)
         {
             CancelInvoke(nameof(SpawnEnemy));
+            DayManaging.instance.UploadScene();
             return;
         }
 
