@@ -8,7 +8,7 @@ public class AttackController : MonoBehaviour
     public Animator animator;
     public bool onUlt = false;
 
-    bool isAlive = true;
+    public bool isAlive = true;
     public float health = 100;
 
     public IAbility[] abilityList;
