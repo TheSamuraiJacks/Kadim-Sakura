@@ -106,7 +106,7 @@ public class StaticSummonerBoss : MonoBehaviour
             // Direkt pozisyon değiştiriyoruz (NavMesh yok, özgürüz!)
             // Vector3.up * 1.5f ekliyoruz ki küpün içine gömülmesin, üstünde dursun
             transform.position = teleportPoints[index].position + Vector3.up * 1.5f;
-
+            spawnPoint = transform;
             // Efekt (Partikül) varsa buraya Instantiate(smokeEffect...) ekleyebilirsin
         }
     }
