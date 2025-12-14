@@ -29,6 +29,9 @@ public class SamuraiBossAI : MonoBehaviour
     private float nextAttackTime = 0f;
     private float distanceToPlayer;
 
+    public float currentHealth = 100;
+    public bool isAlive = true;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -71,6 +74,18 @@ public class SamuraiBossAI : MonoBehaviour
         {
             // Oyuncu çok uzaktaysa: DUR
             agent.isStopped = true;
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            isAlive = false;
+            animator.SetTrigger("Die");
         }
     }
 
