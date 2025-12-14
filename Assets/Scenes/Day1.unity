@@ -320,6 +320,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 920690929011963764, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2246481397375066834, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
       propertyPath: m_Lens.FieldOfView

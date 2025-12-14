@@ -143,9 +143,9 @@ namespace SlimUI.ModernMenu{
 		}
 
 		public void LoadScene(string scene){
-			if(scene != ""){
+			/*if(scene != ""){
 				StartCoroutine(LoadAsynchronously(scene));
-			}
+			}*/
 		}
 
 		public void  DisablePlayCampaign(){

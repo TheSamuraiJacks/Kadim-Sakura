@@ -33,8 +33,12 @@ public class Spawner : MonoBehaviour
         InvokeRepeating(nameof(SpawnEnemy), 2f, spawnInterval);
         DontDestroyOnLoad(this);
     }
-    private void OnEnable()
+    private void Update()
     {
+        if (totalSpawnedCount >= totalEnemiesToSpawn)
+        {
+            DayManaging.instance.UploadScene();
+        }
         
     }
     void SpawnEnemy()
@@ -43,7 +47,6 @@ public class Spawner : MonoBehaviour
         if (totalSpawnedCount >= totalEnemiesToSpawn)
         {
             CancelInvoke(nameof(SpawnEnemy));
-            DayManaging.instance.UploadScene();
             return;
         }
 
