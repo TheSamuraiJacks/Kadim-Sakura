@@ -29,7 +29,7 @@ public class CamFollowTarget : MonoBehaviour
         yRotation += mouseX;
         //Yukarý-Aþaðý Rotasyon
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, -60f, 85f);
 
         Quaternion targetRot = Quaternion.Euler(xRotation, yRotation, 0);
         transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRot, Time.deltaTime * rotPower);
