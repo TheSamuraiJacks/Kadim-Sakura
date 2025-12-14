@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sakura : MonoBehaviour
 {
-    float health = 100;
+    float health = 500;
     bool isAlive = true;
 
     public void TakeDamage(float damage)
