@@ -91,11 +91,14 @@ public class SamuraiBossAI : MonoBehaviour
             currentHealth = 0;
             isAlive = false;
             animator.SetTrigger("Die");
-            Instantiate(orbPrefab).transform.position = transform.position + Vector3.up * 0.5f;
             Destroy(gameObject, 6f);
+            Invoke("UploadScene", 10f);
         }
     }
-
+    void UploadScene()
+    {
+        DayManaging.instance.UploadScene();
+    }
     void ChasePlayer()
     {
         agent.isStopped = false; // Hareketi aç
