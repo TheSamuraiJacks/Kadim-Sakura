@@ -279,7 +279,6 @@ MonoBehaviour:
   totalSpawnedCount: 0
   spawnRange: 5
   playerTransform: {fileID: 1575846679}
-  dayCount: 0
 --- !u!4 &1241841406
 Transform:
   m_ObjectHideFlags: 0
@@ -493,13 +492,18 @@ PrefabInstance:
     - target: {fileID: 3103678260979743162, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
       propertyPath: musicVolume
-      value: 0.153
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: 3103678260979743162, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
       propertyPath: footstepVolume
       value: 0.634
       objectReference: {fileID: 0}
+    - target: {fileID: 3103678260979743162, guid: e611fa6a09de68348b34eb1340409fde,
+        type: 3}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 16da038f841580b43ad53f025d17b3aa, type: 3}
     - target: {fileID: 3615237187319047580, guid: e611fa6a09de68348b34eb1340409fde,
         type: 3}
       propertyPath: m_LocalScale.x
