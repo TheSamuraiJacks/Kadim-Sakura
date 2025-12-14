@@ -1,20 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI; // Resimler için
 using TMPro; // Yazılar için
-using UnityEngine.SceneManagement; // Sahne değişimi için
+using UnityEngine.SceneManagement;
+using System.Collections; // Sahne değişimi ve Coroutine için
 
 public class IntroManager : MonoBehaviour
 {
+    public float yazmaHizi = 0.1f; // Harfler ne kadar hızlı aksın?
+
     [Header("Ekranda Değişecek Parçalar")]
     public Image mangaEkrani;        // Senin "Manga1" dediğin obje
     public TextMeshProUGUI altYazi;  // Altta hikayenin yazdığı yazı kutusu
-    
-    [Header("Sırasıyla İçerikler (Burayı Dolduracağız)")]
+
+    [Header("Sırasıyla İçerikler")]
     public Sprite[] mangaResimleri;  // 4 resim dosyası buraya
     [TextArea(3, 10)]
     public string[] hikayeYazilari;  // 4 hikaye metni buraya
     public AudioClip[] sesEfektleri; // 4 ses dosyası buraya
-    
+
     [Header("Ayarlar")]
     public string oyunSahnesiAdi = "Day1"; // Oyunun başladığı sahnenin adı
 
@@ -25,7 +28,7 @@ public class IntroManager : MonoBehaviour
     {
         // Ses çaları otomatik ekliyoruz
         sesKaynagi = gameObject.AddComponent<AudioSource>();
-        
+
         // İlk sahneyi göstererek başla
         Guncelle();
     }
@@ -33,14 +36,11 @@ public class IntroManager : MonoBehaviour
     // Butona basınca bu çalışacak
     public void Ileri()
     {
-        // --- YENİ EKLENEN KISIM BAŞLANGIÇ ---
-        // Eğer ses kaynağı hala aktifse (şarkı/konuşma bitmediyse)
-        // Fonksiyondan "return" diyerek çık, yani aşağıdaki kodları çalıştırma.
+        // Eğer ses kaynağı hala aktifse (şarkı/konuşma bitmediyse) geçişi engelle
         if (sesKaynagi.isPlaying)
         {
             return;
         }
-        // --- YENİ EKLENEN KISIM BİTİŞ ---
 
         suankiSira++; // Sırayı bir artır
 
@@ -59,24 +59,47 @@ public class IntroManager : MonoBehaviour
     void Guncelle()
     {
         // 1. Ekrandaki resmi değiştir
-        mangaEkrani.sprite = mangaResimleri[suankiSira];
-        
-        // 2. Resmi orjinal boyutuna/oranına getir (Yamulmasın diye)
-        mangaEkrani.preserveAspect = true; 
+        if (suankiSira < mangaResimleri.Length)
+        {
+            mangaEkrani.sprite = mangaResimleri[suankiSira];
+            mangaEkrani.preserveAspect = true;
+        }
 
-        // 3. Yazıyı değiştir
-        if (altYazi != null)
-            altYazi.text = hikayeYazilari[suankiSira];
+        // 2. Yazıyı DAKTİLO EFEKTİ ile değiştir (DÜZELTİLEN KISIM BURASI)
+        if (altYazi != null && suankiSira < hikayeYazilari.Length)
+        {
+            // Eğer önceki yazı hala yazılıyorsa durdur (üst üste binmesin)
+            StopAllCoroutines();
+            // Yeni yazıyı harf harf yazmaya başla
+            StartCoroutine(DaktiloEfekti(hikayeYazilari[suankiSira]));
+        }
 
-        // 4. Sesi çal (Eğer ses dosyası varsa)
+        // 3. Sesi çal (Eğer ses dosyası varsa)
         if (sesEfektleri.Length > suankiSira && sesEfektleri[suankiSira] != null)
         {
             sesKaynagi.Stop(); // Eski sesi sustur
             sesKaynagi.clip = sesEfektleri[suankiSira];
             sesKaynagi.Play(); // Yenisini çal
-        }else if(sesEfektleri.Length == suankiSira)
+        }
+        else if (sesEfektleri.Length == suankiSira)
         {
-            DayManaging.instance.UploadScene();
+            // Burası senin özel kodun, aynen bıraktım
+            if (DayManaging.instance != null)
+                DayManaging.instance.UploadScene();
+        }
+    }
+
+    // --- DAKTİLO MOTORU ---
+    IEnumerator DaktiloEfekti(string gelecekMetin)
+    {
+        // A. Önce kutuyu temizle
+        altYazi.text = "";
+
+        // B. Harf harf yazmaya başla
+        foreach (char harf in gelecekMetin)
+        {
+            altYazi.text += harf; // Bir harf ekle
+            yield return new WaitForSeconds(yazmaHizi); // Bekle
         }
     }
 }
