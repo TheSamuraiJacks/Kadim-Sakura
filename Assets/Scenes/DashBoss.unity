@@ -618,6 +618,12 @@ PrefabInstance:
       objectReference: {fileID: 877054242}
     - target: {fileID: 4204240661554930378, guid: 1ded55f6bd5023645a5833f8090f5858,
         type: 3}
+      propertyPath: orbPrefab
+      value: 
+      objectReference: {fileID: 2865216790203391490, guid: ecbace3e9ae7bbd40ba450a288dfed8b,
+        type: 3}
+    - target: {fileID: 4204240661554930378, guid: 1ded55f6bd5023645a5833f8090f5858,
+        type: 3}
       propertyPath: skillRange
       value: 2.5
       objectReference: {fileID: 0}

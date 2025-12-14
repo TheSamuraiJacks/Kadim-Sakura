@@ -32,6 +32,8 @@ public class SamuraiBossAI : MonoBehaviour
     public float currentHealth = 100;
     public bool isAlive = true;
 
+    public GameObject orbPrefab;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -89,6 +91,8 @@ public class SamuraiBossAI : MonoBehaviour
             currentHealth = 0;
             isAlive = false;
             animator.SetTrigger("Die");
+            Instantiate(orbPrefab).transform.position = transform.position + Vector3.up * 0.5f;
+            Destroy(gameObject, 6f);
         }
     }
 
