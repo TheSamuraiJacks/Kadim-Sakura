@@ -20,13 +20,13 @@ public class TuccarSistemi : MonoBehaviour
     public float zamOrani = 0.2f;     // %20 zam için 0.2, %50 için 0.5 yaz
 
     // Gizli deðiþkenler
-    private int mevcutOrb;
-
-    void Start()
+    private float mevcutOrb;
+    void Awake()
     {
+        this.gameObject.SetActive(true);
         // Kayýt sistemini iptal ettik. Direkt baþlangýç parasýyla baþlýyoruz.
-        mevcutOrb = baslangicParasi;
-
+        mevcutOrb = PlayerPrefs.GetFloat("GainedOrbValue", 0);
+        
         // Ekraný güncelle
         UIGuncelle();
     }
@@ -34,6 +34,8 @@ public class TuccarSistemi : MonoBehaviour
     // TEST ÝÇÝN: M tuþu para verir
     void Update()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         if (Input.GetKeyDown(KeyCode.M))
         {
             ParaKazan(500);
@@ -53,6 +55,9 @@ public class TuccarSistemi : MonoBehaviour
         {
             ParaHarca(canFiyati);
             Debug.Log("Can Satýn Alýndý! Canlar fullendi.");
+            float a = PlayerPrefs.GetFloat("maxHealth");
+            a = a + 20;
+            PlayerPrefs.SetFloat("maxHealth", a);
             // Örn: PlayerHealth.Heal();
 
             // ZAM YAPMA ZAMANI
@@ -77,7 +82,6 @@ public class TuccarSistemi : MonoBehaviour
 
             // ZAM YAPMA ZAMANI
             hasarFiyati = Mathf.RoundToInt(hasarFiyati * (1 + zamOrani));
-
             UIGuncelle();
         }
         else
@@ -89,6 +93,7 @@ public class TuccarSistemi : MonoBehaviour
     void ParaHarca(int miktar)
     {
         mevcutOrb -= miktar;
+        PlayerPrefs.SetFloat("GainedOrbValue", mevcutOrb);
         // Kayýt iþlemi (PlayerPrefs) SÝLÝNDÝ. Sadece anlýk düþüyoruz.
     }
 
@@ -100,8 +105,9 @@ public class TuccarSistemi : MonoBehaviour
 
     public void AlisverisiBitir()
     {
-        tuccarPanel.SetActive(false);
+        PlayerPrefs.SetFloat("GainedOrbValue", mevcutOrb);
         Time.timeScale = 1;
+        DayManaging.instance.UploadScene();
     }
 
     // Tüm yazýlarý güncelleyen fonksiyon

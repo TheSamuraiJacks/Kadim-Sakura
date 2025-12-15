@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,18 +8,18 @@ public class GameOverUı : MonoBehaviour
 {
     public GameObject GameoverPanel;
     public GameObject[] gameObjectsToDisactive;
-    void Start()
+
+
+    private void OnEnable()
     {
-        //GameoverPanel.SetActive(false);
         ShowGameOver();
     }
-
     public void ShowGameOver()
     {
         Time.timeScale = 0f; // Oyunu durdur
         foreach(GameObject go in gameObjectsToDisactive)
         {
-            go.SetActive(false);
+            Destroy(go);
         }
         GameoverPanel.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;

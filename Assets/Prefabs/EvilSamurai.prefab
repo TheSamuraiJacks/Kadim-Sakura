@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TagName: Player
   hitSound: {fileID: 0}
+  damageValue: 1
 --- !u!4 &1791986218138853718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: dd2eb6d36ff22574f839de01478b8481,
@@ -818,5 +819,6 @@ MonoBehaviour:
   attackSpeed: 1.5
   attackRange: 2
   scoreValue: 10
+  mySpawner: {fileID: 0}
   orbPrefab: {fileID: 2865216790203391490, guid: ecbace3e9ae7bbd40ba450a288dfed8b,
     type: 3}

@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Marketing : MonoBehaviour
 {
-    // Start is called before the first frame update
+    float currentOrbs;
     void Start()
     {
-        
+        currentOrbs = PlayerPrefs.GetFloat("GainedOrbValue", 0);
+        currentOrbs = Mathf.Max(0, currentOrbs);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
