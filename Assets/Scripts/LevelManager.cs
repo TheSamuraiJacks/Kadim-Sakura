@@ -5,11 +5,6 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject tuccarPanel; // Tüccar penceresini buraya sürükleyeceðiz
 
-    void Start()
-    {
-        // Oyun baþladýðýnda tüccar kapalý olsun
-        tuccarPanel.SetActive(false);
-    }
 
     // Bu fonksiyonu "Bölüm Bittiðinde" çaðýracaðýz
     public void BolumBitti()

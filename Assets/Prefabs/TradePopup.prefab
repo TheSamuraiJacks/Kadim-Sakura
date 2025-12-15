@@ -1133,6 +1133,7 @@ GameObject:
   - component: {fileID: 6511409178633236489}
   - component: {fileID: 1227982462613092811}
   - component: {fileID: 1835600298694918433}
+  - component: {fileID: 6136060134568465458}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1188,6 +1189,19 @@ MonoBehaviour:
   canFiyati: 100
   hasarFiyati: 250
   zamOrani: 0.2
+  prefab: {fileID: 0}
+--- !u!114 &6136060134568465458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2950945393488967526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0447a63fb9d6d499f54bcc046a2c10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2996575440669576530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,6 +2139,7 @@ MonoBehaviour:
   canFiyati: 100
   hasarFiyati: 250
   zamOrani: 0.2
+  prefab: {fileID: 0}
 --- !u!1 &7479283098915948534
 GameObject:
   m_ObjectHideFlags: 0

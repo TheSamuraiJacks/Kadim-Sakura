@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AttackController : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class AttackController : MonoBehaviour
 
     public bool isAlive = true;
     public float health = 100;
-
+    public float maxHealth = 100;
     public IAbility[] abilityList;
 
     [Header("Efekt Ayarları")]
@@ -23,9 +25,14 @@ public class AttackController : MonoBehaviour
     [HideInInspector] public Spawner mySpawner;
 
     public Katana katana;
+    public GameObject healthBar;
+    public GameObject OrbBar;
+    public TextMeshProUGUI orbValueText;
 
+    public GameObject panel;
     private void Start()
     {
+        maxHealth = PlayerPrefs.GetFloat("maxHealth", 100);
         // AudioSource bileşenini al veya ekle
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -41,6 +48,8 @@ public class AttackController : MonoBehaviour
 
         // Oyun başladığında efekt yanlışlıkla çalışmasın diye durduruyoruz
         if (slashVFX != null) slashVFX.Stop();
+
+        health = maxHealth;
     }
 
     private void Update()
@@ -69,7 +78,18 @@ public class AttackController : MonoBehaviour
                 if (abilityList[1] != null)
                     abilityList[1].Use();
             }
+
+
+            float temp = PlayerPrefs.GetFloat("GainedOrbValue",0);
+            orbValueText.text = temp.ToString() + "/100";
+
+            RectTransform orb = OrbBar.GetComponent<RectTransform>();
+            Vector3 scale = orb.localScale;
+            scale.x = Mathf.Clamp(temp / maxHealth, 0, 1);
+            orb.localScale = scale;
+
         }
+        
     }
 
     void Attack()
@@ -112,6 +132,12 @@ public class AttackController : MonoBehaviour
             animator.SetTrigger("isHurt");
             if (health <= 0) isAlive = false;
 
+            RectTransform rt = healthBar.GetComponent<RectTransform>();
+
+            Vector3 scale = rt.localScale;
+            scale.x = health / 100f;
+            rt.localScale = scale;
+
             if (!isAlive)
             {
                 animator.SetTrigger("isDead");
@@ -123,6 +149,7 @@ public class AttackController : MonoBehaviour
                 }
 
                 Destroy(gameObject, 5f);
+                panel.SetActive(true);
             }
         }
         
