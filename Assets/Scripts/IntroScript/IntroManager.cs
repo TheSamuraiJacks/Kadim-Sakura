@@ -1,105 +1,151 @@
 using UnityEngine;
-using UnityEngine.UI; // Resimler için
-using TMPro; // Yazılar için
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
-using System.Collections; // Sahne değişimi ve Coroutine için
+using System.Collections;
 
 public class IntroManager : MonoBehaviour
 {
-    public float yazmaHizi = 0.1f; // Harfler ne kadar hızlı aksın?
-
     [Header("Ekranda Değişecek Parçalar")]
-    public Image mangaEkrani;        // Senin "Manga1" dediğin obje
-    public TextMeshProUGUI altYazi;  // Altta hikayenin yazdığı yazı kutusu
+    public Image mangaEkrani;
+    public TextMeshProUGUI altYazi;
+
+    [Header("Gecme İkonu Ayarları")]
+    public GameObject gecmeSimgesi;
+    public float zorunluBekleme = 3.0f; // Butonun çıkması için gereken süre
+    public float otomatikGecisSuresi = 10.0f; // Hiç basmazsa kendi geçeceği süre
+    public float fadeHizi = 1.5f;
 
     [Header("Sırasıyla İçerikler")]
-    public Sprite[] mangaResimleri;  // 4 resim dosyası buraya
+    public Sprite[] mangaResimleri;
     [TextArea(3, 10)]
-    public string[] hikayeYazilari;  // 4 hikaye metni buraya
-    public AudioClip[] sesEfektleri; // 4 ses dosyası buraya
+    public string[] hikayeYazilari;
+    public AudioClip[] sesEfektleri;
 
     [Header("Ayarlar")]
-    public string oyunSahnesiAdi = "Day1"; // Oyunun başladığı sahnenin adı
+    public string oyunSahnesiAdi = "Day1";
 
     private int suankiSira = 0;
     private AudioSource sesKaynagi;
+    private bool gecebilirMi = false;
+    private CanvasGroup iconCanvasGroup;
 
     void Start()
     {
-        // Ses çaları otomatik ekliyoruz
         sesKaynagi = gameObject.AddComponent<AudioSource>();
 
-        // İlk sahneyi göstererek başla
+        if (gecmeSimgesi != null)
+        {
+            iconCanvasGroup = gecmeSimgesi.GetComponent<CanvasGroup>();
+            if (iconCanvasGroup == null) iconCanvasGroup = gecmeSimgesi.AddComponent<CanvasGroup>();
+
+            gecmeSimgesi.SetActive(false);
+            iconCanvasGroup.alpha = 0;
+        }
+
         Guncelle();
     }
 
-    // Butona basınca bu çalışacak
     public void Ileri()
     {
-        // Eğer ses kaynağı hala aktifse (şarkı/konuşma bitmediyse) geçişi engelle
-        if (sesKaynagi.isPlaying)
-        {
-            return;
-        }
+        // Eğer zorunlu bekleme süresi dolmadıysa basamasın
+        if (!gecebilirMi) return;
 
-        suankiSira++; // Sırayı bir artır
+        suankiSira++;
 
-        // Eğer resimler bittiyse oyuna geç
         if (suankiSira >= mangaResimleri.Length)
         {
             SceneManager.LoadScene(oyunSahnesiAdi);
         }
         else
         {
-            // Bitmediyse yeni sayfayı göster
             Guncelle();
         }
     }
 
     void Guncelle()
     {
-        // 1. Ekrandaki resmi değiştir
+        // -- HER ŞEYİ SIFIRLA --
+        gecebilirMi = false;
+
+        // Önemli: Eski sayaçları (Auto Skip dahil) durduruyoruz ki üst üste binmesin
+        StopAllCoroutines();
+
+        if (gecmeSimgesi != null)
+        {
+            gecmeSimgesi.SetActive(false);
+            iconCanvasGroup.alpha = 0;
+        }
+
+        // 1. Resim
         if (suankiSira < mangaResimleri.Length)
         {
             mangaEkrani.sprite = mangaResimleri[suankiSira];
             mangaEkrani.preserveAspect = true;
         }
 
-        // 2. Yazıyı DAKTİLO EFEKTİ ile değiştir (DÜZELTİLEN KISIM BURASI)
+        // 2. Yazı
         if (altYazi != null && suankiSira < hikayeYazilari.Length)
         {
-            // Eğer önceki yazı hala yazılıyorsa durdur (üst üste binmesin)
-            StopAllCoroutines();
-            // Yeni yazıyı harf harf yazmaya başla
-            StartCoroutine(DaktiloEfekti(hikayeYazilari[suankiSira]));
+            altYazi.text = hikayeYazilari[suankiSira];
         }
 
-        // 3. Sesi çal (Eğer ses dosyası varsa)
+        // 3. Ses
         if (sesEfektleri.Length > suankiSira && sesEfektleri[suankiSira] != null)
         {
-            sesKaynagi.Stop(); // Eski sesi sustur
+            sesKaynagi.Stop();
             sesKaynagi.clip = sesEfektleri[suankiSira];
-            sesKaynagi.Play(); // Yenisini çal
+            sesKaynagi.Play();
         }
-        else if (sesEfektleri.Length == suankiSira)
-        {
-            // Burası senin özel kodun, aynen bıraktım
-            if (DayManaging.instance != null)
-                DayManaging.instance.UploadScene();
-        }
+
+        // 4. Zamanlayıcıları Başlat
+        StartCoroutine(AkisYonetimi());
     }
 
-    // --- DAKTİLO MOTORU ---
-    IEnumerator DaktiloEfekti(string gelecekMetin)
+    // --- TEK COROUTINE İÇİNDE TÜM ZAMANLAMAYI YÖNETİYORUZ ---
+    IEnumerator AkisYonetimi()
     {
-        // A. Önce kutuyu temizle
-        altYazi.text = "";
+        // A. ZORUNLU BEKLEME (3 Saniye)
+        // Oyuncu bu sürede geçemez, buton görünmez.
+        yield return new WaitForSeconds(zorunluBekleme);
 
-        // B. Harf harf yazmaya başla
-        foreach (char harf in gelecekMetin)
+        // B. BUTONU AKTİF ET
+        gecebilirMi = true; // Artık tıklayabilir
+        if (gecmeSimgesi != null)
         {
-            altYazi.text += harf; // Bir harf ekle
-            yield return new WaitForSeconds(yazmaHizi); // Bekle
+            gecmeSimgesi.SetActive(true);
+            StartCoroutine(PulseEfekti()); // Işık efektini ayrı başlat
+        }
+
+        // C. OTOMATİK GEÇİŞ İÇİN GERİ KALAN SÜREYİ BEKLE
+        // (Toplam süre - Zorunlu bekleme) kadar daha bekleriz.
+        // Örneğin: 10 - 3 = 7 saniye daha bekler.
+        float kalanSure = otomatikGecisSuresi - zorunluBekleme;
+
+        // Eğer kalan süre negatifse (yani auto skip süresini 2 sn yaptıysan) beklemesin
+        if (kalanSure > 0)
+        {
+            yield return new WaitForSeconds(kalanSure);
+        }
+
+        // D. SÜRE DOLDU, HALA GEÇİLMEDİYSE OTOMATİK GEÇ
+        // Buraya geldiyse oyuncu butona basmamış demektir.
+        Ileri();
+    }
+
+    // --- PULSE (ISIK KISILIP AÇILMA) EFEKTİ ---
+    IEnumerator PulseEfekti()
+    {
+        float zamanSayaci = 0f;
+        while (true)
+        {
+            zamanSayaci += Time.deltaTime;
+            float alphaDegeri = 0.2f + Mathf.PingPong(zamanSayaci * fadeHizi, 0.8f);
+
+            if (iconCanvasGroup != null)
+                iconCanvasGroup.alpha = alphaDegeri;
+
+            yield return null;
         }
     }
 }

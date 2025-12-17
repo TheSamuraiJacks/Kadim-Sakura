@@ -2513,6 +2513,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3412548740855361018, guid: 9d3305d2c2c84da44afde7a6f3f7a88a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4331382244227667880, guid: 9d3305d2c2c84da44afde7a6f3f7a88a,
         type: 3}
       propertyPath: panel

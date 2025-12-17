@@ -4,34 +4,34 @@ using System; // TextMeshPro
 
 public class TuccarSistemi : MonoBehaviour
 {
-    [Header("UI Baðlantýlarý")]
-    public TextMeshProUGUI paraText;       // Sað üstteki toplam para yazýsý
-    public TextMeshProUGUI canFiyatiText;   // Sol kutudaki "Fiyat: 100" yazýsý
-    public TextMeshProUGUI hasarFiyatiText; // Sað kutudaki "Fiyat: 250" yazýsý
+    [Header("UI Baï¿½lantï¿½larï¿½")]
+    public TextMeshProUGUI paraText;       // Saï¿½ ï¿½stteki toplam para yazï¿½sï¿½
+    public TextMeshProUGUI canFiyatiText;   // Sol kutudaki "Fiyat: 10" yazï¿½sï¿½
+    public TextMeshProUGUI hasarFiyatiText; // Saï¿½ kutudaki "Fiyat: 25" yazï¿½sï¿½
     public GameObject tuccarPanel;
 
-    [Header("Ekonomi Ayarlarý")]
-    public int baslangicParasi = 0;   // Oyun açýldýðýnda kaç parayla baþlasýn?
-    public int canFiyati = 100;       // Ýlk fiyat
-    public int hasarFiyati = 250;     // Ýlk fiyat
+    [Header("Ekonomi Ayarlarï¿½")]
+    public int baslangicParasi = 0;   // Oyun aï¿½ï¿½ldï¿½ï¿½ï¿½nda kaï¿½ parayla baï¿½lasï¿½n?
+    public int canFiyati = 10;       // ï¿½lk fiyat
+    public int hasarFiyati = 25;     // ï¿½lk fiyat
 
-    [Header("Zam Ayarý (0.2 = %20)")]
+    [Header("Zam Ayarï¿½ (0.2 = %20)")]
     [Range(0f, 1f)]
-    public float zamOrani = 0.2f;     // %20 zam için 0.2, %50 için 0.5 yaz
+    public float zamOrani = 0.2f;     // %20 zam iï¿½in 0.2, %50 iï¿½in 0.5 yaz
 
-    // Gizli deðiþkenler
+    // Gizli deï¿½iï¿½kenler
     private float mevcutOrb;
     void Awake()
     {
         this.gameObject.SetActive(true);
-        // Kayýt sistemini iptal ettik. Direkt baþlangýç parasýyla baþlýyoruz.
+        // Kayï¿½t sistemini iptal ettik. Direkt baï¿½langï¿½ï¿½ parasï¿½yla baï¿½lï¿½yoruz.
         mevcutOrb = PlayerPrefs.GetFloat("GainedOrbValue", 0);
         
-        // Ekraný güncelle
+        // Ekranï¿½ gï¿½ncelle
         UIGuncelle();
     }
 
-    // TEST ÝÇÝN: M tuþu para verir
+    // TEST ï¿½ï¿½ï¿½N: M tuï¿½u para verir
     void Update()
     {
         Cursor.lockState = CursorLockMode.Confined;
@@ -40,10 +40,10 @@ public class TuccarSistemi : MonoBehaviour
         {
             ParaKazan(500);
         }
-        // YENÝ EKLENEN KISIM: 'P' tuþuna basýnca Paneli Aç/Kapa
+        // YENï¿½ EKLENEN KISIM: 'P' tuï¿½una basï¿½nca Paneli Aï¿½/Kapa
         if (Input.GetKeyDown(KeyCode.P))
         {
-            // Panel açýksa kapatýr, kapalýysa açar (Tersi iþlemi yapar)
+            // Panel aï¿½ï¿½ksa kapatï¿½r, kapalï¿½ysa aï¿½ar (Tersi iï¿½lemi yapar)
             bool durum = tuccarPanel.activeSelf;
             tuccarPanel.SetActive(!durum);
         }
@@ -54,17 +54,17 @@ public class TuccarSistemi : MonoBehaviour
         if (mevcutOrb >= canFiyati)
         {
             ParaHarca(canFiyati);
-            Debug.Log("Can Satýn Alýndý! Canlar fullendi.");
+            Debug.Log("Can Satï¿½n Alï¿½ndï¿½! Canlar fullendi.");
             float a = PlayerPrefs.GetFloat("maxHealth");
             a = a + 20;
             PlayerPrefs.SetFloat("maxHealth", a);
-            // Örn: PlayerHealth.Heal();
+            // ï¿½rn: PlayerHealth.Heal();
 
             // ZAM YAPMA ZAMANI
-            // Fiyatý %20 (veya ayarlý oran) artýrýp tam sayýya yuvarlýyoruz
+            // Fiyatï¿½ %20 (veya ayarlï¿½ oran) artï¿½rï¿½p tam sayï¿½ya yuvarlï¿½yoruz
             canFiyati = Mathf.RoundToInt(canFiyati * (1 + zamOrani));
 
-            UIGuncelle(); // Yeni fiyatý ekrana yaz
+            UIGuncelle(); // Yeni fiyatï¿½ ekrana yaz
         }
         else
         {
@@ -77,8 +77,8 @@ public class TuccarSistemi : MonoBehaviour
         if (mevcutOrb >= hasarFiyati)
         {
             ParaHarca(hasarFiyati);
-            Debug.Log("Güçlendirme Alýndý!");
-            // Örn: PlayerDamage.Increase();
+            Debug.Log("Gï¿½ï¿½lendirme Alï¿½ndï¿½!");
+            // ï¿½rn: PlayerDamage.Increase();
 
             // ZAM YAPMA ZAMANI
             hasarFiyati = Mathf.RoundToInt(hasarFiyati * (1 + zamOrani));
@@ -94,7 +94,7 @@ public class TuccarSistemi : MonoBehaviour
     {
         mevcutOrb -= miktar;
         PlayerPrefs.SetFloat("GainedOrbValue", mevcutOrb);
-        // Kayýt iþlemi (PlayerPrefs) SÝLÝNDÝ. Sadece anlýk düþüyoruz.
+        // Kayï¿½t iï¿½lemi (PlayerPrefs) Sï¿½Lï¿½NDï¿½. Sadece anlï¿½k dï¿½ï¿½ï¿½yoruz.
     }
 
     public void ParaKazan(int miktar)
@@ -110,16 +110,16 @@ public class TuccarSistemi : MonoBehaviour
         DayManaging.instance.UploadScene();
     }
 
-    // Tüm yazýlarý güncelleyen fonksiyon
+    // Tï¿½m yazï¿½larï¿½ gï¿½ncelleyen fonksiyon
     void UIGuncelle()
     {
-        // Toplam parayý yaz
+        // Toplam parayï¿½ yaz
         paraText.text = mevcutOrb.ToString();
 
-        // Yeni fiyatlarý etiketlere yaz
-        // "\n" alt satýra geçmek demektir.
+        // Yeni fiyatlarï¿½ etiketlere yaz
+        // "\n" alt satï¿½ra geï¿½mek demektir.
         canFiyatiText.text = "CAN YENILE Fiyat: " + canFiyati.ToString();
-        hasarFiyatiText.text = "GÜÇLENDIRME Fiyat: " + hasarFiyati.ToString();
+        hasarFiyatiText.text = "Gï¿½ï¿½LENDIRME Fiyat: " + hasarFiyati.ToString();
     }
 
     
