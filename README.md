@@ -39,11 +39,11 @@ Bu proje **The Samurai Jacks** takımı tarafından tutkuyla geliştirilmiştir.
 
 | İsim | Rol & Unvan |
 | :--- | :--- |
-| **Arda Anıl Morkoç** | 👑 Team Lead & Developer (Boss AI & Tech |
-| **Zehra Gürcan** | 💻 Core Developer (Game Loop & Mechanics) |
-| **Yusuf Üveys Kaplan** | 🎨 Environment & UI Designer |
-| **Sudenaz Ulusay** | 🖌️ 2D Artist & UI/Environment |
-| **Adil Umut Tuncer** | 🎵 Audio & SFX Designer |
+| [**Arda Anıl Morkoç**](https://www.linkedin.com/in/ardamorkoc/) | 🚀 Team Lead & Developer |
+| [**Zehra Gürcan**](https://www.linkedin.com/in/zehra-g%C3%BCrcan-874a3625b/) | 💻 Core Developer |
+| [**Yusuf Üveys Kaplan**](https://www.linkedin.com/in/yusuf-%C3%BCveys-kaplan/) | 🎨 Environment & UI Designer |
+| [**Sudenaz Ulusay**](https://www.linkedin.com/in/sudenaz-ulusay-80b85a293/) | 🖌️ 2D Artist & UI/Environment |
+| [**Adil Umut Tuncer**](https://www.linkedin.com/in/adilumut-tuncer/) | 🎵 Audio & SFX Designer |
 
 ---
 
