@@ -64,12 +64,21 @@ Bu proje **The Samurai Jacks** takımı tarafından tutkuyla geliştirilmiştir.
 ---
 
 ## 📥 İndir ve Oyna (Download & Play)
-Oyunun en güncel versiyonunu **Itch.io** üzerinden ücretsiz indirebilirsiniz:
+
+### 🚀 Güncel Sürüm (Önerilen)
+Hata düzeltmeleri ve iyileştirmeler içeren en güncel versiyonu **Itch.io** üzerinden indirebilirsiniz:
 
 [![Itch.io İndir](https://static.itch.io/images/badge-color.svg)](https://ardamorkoc.itch.io/kadim-sakura)
 
-1.  Yukarıdaki butona veya [bu linke](https://ardamorkoc.itch.io/kadim-sakura) tıklayın.
-2.  Itch.io sayfasındaki **"Download"** butonuna basın.
+### 🏛️ Orijinal Jam Sürümü (Arşiv)
+StartGate GameJam'25 kapsamında **48. saatte teslim edilen** ham versiyonu incelemek isterseniz:
+* 🔗 [**Game Actor (Orijinal Teslim Sayfası)**](https://jam.game.actor/game/208)
+
+---
+
+### ⚙️ Kurulum Adımları
+1.  Yukarıdaki **Itch.io** butonuna tıklayın.
+2.  Açılan sayfada **"Download"** butonuna basın.
 3.  İndirdiğiniz ZIP dosyasını klasöre çıkarın.
 4.  **KadimSakura.exe** ile oyunu başlatın.
 ---
