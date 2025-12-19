@@ -4,6 +4,13 @@
 
 ![banner](https://github.com/user-attachments/assets/e397a8f9-f539-46f8-85f6-b9a8a69825a2)
 
+> [!IMPORTANT]
+> **🚧 Proje Durumu: Geliştirme Devam Ediyor (Post-Jam Development)**
+> Bu proje, **StartGate GameJam 2025** kapsamında **48 saat** gibi kısıtlı bir sürede sıfırdan geliştirilmiştir.
+>
+> Kod yapısı ve mimari, "hızlı prototipleme" (MVP) odaklı olduğu için optimizasyon eksiklikleri veya "spaghetti code" içerebilir. 🍝
+> * **Jam Versiyonu:** İlk 48 saatin çıktısıdır.
+> * **Şu Anki Durum:** Yarışma sonrası (Post-Jam) güncellemeler, bug fix'ler ve iyileştirmelerle proje aktif olarak geliştirilmeye devam etmektedir.
 ---
 
 ## 📖 Hakkında (About)
